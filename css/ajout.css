@@ -1,0 +1,31 @@
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .title {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .text {
+    margin: 0;
+  }
+  
+  .header-boxes {
+    display: flex;
+  }
+  
+  .header-box {
+    /* Add your styles for header boxes */
+  }
+  
+  .icon {
+    /* Add your styles for icons */
+  }
