@@ -11,6 +11,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
      - name: Correction key
-       run: sshpass -p${{ secrets.MDP }} ssh etu724@51.210.13.26 "cd .ssh && chmod g-rwx id_rsa"
+       run: sshpass -p${{ secrets.MDP }} ssh -o StrictHostKeyChecking=accept-new etu724@51.210.13.26 "cd .ssh && chmod g-rwx id_rsa"
      - name: Pull
-       run: sshpass -p${{ secrets.MDP }} ssh etu724@51.210.13.26 "cd end-project-A3-Web/ && git pull"
+       run: sshpass -p${{ secrets.MDP }} ssh -o StrictHostKeyChecking=accept-new etu724@51.210.13.26 "cd end-project-A3-Web/ && git pull"
