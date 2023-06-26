@@ -11,12 +11,12 @@
     // Paramètres de connexion à la base de données
     const DB_SERVER = '127.0.0.1';
     const DB_PORT = '5432';
-    const DB_NAME = 'web_accident';
-    const DB_USER = 'postgres';
-    const DB_PASSWORD = '';
+    const DB_NAME = 'etu724';
+    const DB_USER = 'etu724';
+    const DB_PASSWORD = 'unjvjhys';
 
     // Constante pour l'access token
-    const ACCESS_TOKEN_NAME = 'web_accident_session';
+    const ACCESS_TOKEN_NAME = 'etu724_session';
 
     /*
         Définition du chemin vers le dossier library

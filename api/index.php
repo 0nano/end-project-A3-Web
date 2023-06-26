@@ -15,7 +15,7 @@
 
     header('content-type: application/json; charset=utf-8');
 
-//    $db = new Database();
+    $db = new Database();
 
     /**
      * Récupération des informations de connexion
