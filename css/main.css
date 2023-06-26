@@ -16,6 +16,12 @@ h2 {
   color: var(--green);
   font-size: 35px;
   font-family: 'Itim', sans-serif;
+  text-align: center;
+
+}
+
+h3{
+  text-align: center;
 }
 
 .text{
@@ -146,12 +152,22 @@ footer {
 }
 
 .left-box-title{
-  margin-left: 15%;
   width: 100%;
   margin-top: 10%;
-  
 }
 /* ACCUEIL*/
 /* AJOUT*/
 /* VISUALISATION*/
+
+.visu-list{
+  margin-left: 5%;
+  font-size: 20px;
+}
+
+.visu-choice{
+  background-color: red;
+  width: 30%;
+  margin-left: 20%;
+  display: flex;
+}
 /* PREDICTION*/
