@@ -1,0 +1,6 @@
+# Malheureusement, le serveur de l'ISEN n'autorise pas lutilisation des fichiers .htaccess
+
+<Ifmodule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^api/(.*) /api/index.php/$1 [QSA,NC,L]
+</ifmodule>
