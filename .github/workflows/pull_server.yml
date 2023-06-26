@@ -8,7 +8,7 @@ on:
   
 jobs:
   build:
-    runs-on: ubuntu-lastest
+    runs-on: ubuntu-20.04
     steps:
      - name: Correction key
        run: sshpass -p${{ secrets.MDP }} ssh etu724@51.210.13.26 "cd .ssh && chmod g-rwx id_rsa"
