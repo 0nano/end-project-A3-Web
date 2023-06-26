@@ -11,7 +11,7 @@
     require_once 'library/exceptions.php';
 
     class Database {
-        protected PDO $PDO;
+        protected $PDO;
 
         /**
          * Connection à la base de données
