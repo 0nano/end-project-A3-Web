@@ -201,9 +201,14 @@ footer {
 }
 
 .visu-choice{
-  background-color: red;
-  width: 30%;
-  margin-left: 20%;
+  width: 40%;
+  margin-left: 27%;
   display: flex;
+}
+
+.visu-icon{
+  margin-left: 25%;
+  width: 40px;
+  margin-top: 3px;
 }
 /* PREDICTION*/
