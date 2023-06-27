@@ -184,7 +184,7 @@
          */
         public function getUserAccessToken(string $mail, string $password): string {
             try {
-                this->verifyUserCredentials($mail, $password);
+                $this->verifyUserCredentials($mail, $password);
             } catch (Exception $e) {
                 throw $e;
             }
@@ -220,7 +220,7 @@
          */
         public function disconnectUser($access_token): bool {
             try {
-                this->verifyUserAccessToken($access_token);
+                $this->verifyUserAccessToken($access_token);
             } catch (Exception $e) {
                 throw $e;
             }
