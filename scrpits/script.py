@@ -234,8 +234,7 @@ with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
 
         try:
             # Validate and parse the date string
-            date_time = datetime.datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
-            date = date_time.date()
+            date = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
         except ValueError as e:
             print(f"Invalid date format for '{date_str}': {str(e)}")
             continue
