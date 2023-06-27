@@ -9,4 +9,9 @@
      * This exception is thrown when the PDO doesn't work with PostgreSQL and MySQL. 
      */
     class PDONotFind extends Exception {}
+
+    /**
+     * This exception is thrown when the user is not found in the database.
+     */
+    class UserNotFound extends Exception {}
 ?>

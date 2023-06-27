@@ -36,6 +36,66 @@
         } 
 
 
-    }
+        /**
+         * Gets the password hash of a user
+         * 
+         * @param string $mail
+         * 
+         * @return string if the password hash exists.
+         */
+        public function getUserPasswordHash(string $mail): string {
+            $mail = strtolower($mail);
 
+            $request = 'SELECT password FROM users WHERE mail = :mail';
+
+            $query = $this->PDO->prepare($request);
+            $query->bindParam(':mail', $mail);
+            $query->execute();
+
+            $result = $query->fetch(PDO::FETCH_OBJ);
+
+            if(!$result){
+                throw new UserNotFound();
+            }
+
+            return $result['password'];
+        }
+
+        /**
+         * Verifies the User credentials
+         * 
+         * @param string $mail
+         * @param string $password
+         * 
+         * @return bool true if the credentials are correct.
+         */
+        public function verifyUserCredentials(string $mail, string $password): bool {
+            $mail = strtolower($mail);
+
+            $request = 'SELECT password FROM users WHERE mail = :mail';
+
+            $query = $this->PDO->prepare($request);
+            $query->bindParam(':mail', $mail);
+            $query->execute();
+
+            $result = $query->fetch(PDO::FETCH_OBJ);
+
+            if(!$result){
+                throw new UserNotFound();
+            }
+
+            return password_verify($password, $result['password']);
+        }
+
+        /**
+         * Verifies the user acces token
+         * 
+         * @param string $access_token
+         * 
+         * @return bool true if the access token is correct.
+         */
+        public function verifyUserAccessToken(string $access_token): bool {
+            
+        }
+    }
 ?>
