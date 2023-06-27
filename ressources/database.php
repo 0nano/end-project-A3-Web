@@ -3,9 +3,9 @@
      * PHP Version 8.2.7
      */
 
-    /*init_set('display_errors', 1);
+    ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);*/
+    error_reporting(E_ALL);
 
     require_once 'config.php';
     require_once 'library/exceptions.php';
@@ -28,7 +28,7 @@
                 );
             } else if(extension_loaded('pdo_mysql')){
                 $this->PDO = new PDO(
-                    'mysql:host=' . DB_SERVER . ';port=3306;dbname=' . DB_NAME,
+                    'mysql:host=' . DB_SERVER . ';port=3306;dbname=' . DB_NAME . ';charset=utf8',
                     DB_USER,
                     DB_PASSWORD
                 );
@@ -254,7 +254,7 @@
             $query = $this->PDO->prepare($request);
             $query->execute();
 
-            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if(!$result){
                 throw new ConnectionException();
@@ -276,7 +276,7 @@
             $query = $this->PDO->prepare($request);
             $query->execute();
 
-            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if(!$result){
                 throw new ConnectionException();
@@ -298,7 +298,7 @@
             $query = $this->PDO->prepare($request);
             $query->execute();
 
-            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if(!$result){
                 throw new ConnectionException();
@@ -320,7 +320,7 @@
             $query = $this->PDO->prepare($request);
             $query->execute();
 
-            $result = $query->fetchAll(PDO::FETCH_OBJ);
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if(!$result){
                 throw new ConnectionException();
