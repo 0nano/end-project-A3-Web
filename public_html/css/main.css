@@ -145,6 +145,11 @@ footer {
   margin-left:90%;
 }
 
+.footer-img-groupe{
+  margin-top: 0%;
+  margin-left:45%;
+  position: fixed;
+}
 
 .body-body{
   position: fixed;
