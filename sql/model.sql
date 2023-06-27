@@ -46,7 +46,7 @@ CREATE TABLE accident (
     latitude FLOAT NOT NULL,
     longitude FLOAT NOT NULL,
     descr_grav INT NOT NULL,
-    grav_name VARCHAR(255) NOT NULL,
+    grav_name VARCHAR(255) ,
     department_number INT NOT NULL,
     department_name VARCHAR(255) NOT NULL,
     region_number INT NOT NULL,

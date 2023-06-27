@@ -219,7 +219,7 @@ with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
     for row in csv_data:
         # Récupération des valeurs du CSV
         num_acc = int(row[1].strip())
-        date_str = row[4].strip()
+        date = row[4].strip()
         id_code_insee = int(row[0].strip())
         ville = row[5].strip()
         latitude = float(row[6].strip())
@@ -231,13 +231,6 @@ with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
 
         grav_name = dico_grav.get(descr_grav)
         region_name = dico_region.get(region_number)
-
-        try:
-            # Validate and parse the date string
-            date = datetime.datetime.strptime(date_str, "%Y-%m-%d").date()
-        except ValueError as e:
-            print(f"Invalid date format for '{date_str}': {str(e)}")
-            continue
 
         # Insertion des données dans la table "accident"
         mycursor.execute("""
