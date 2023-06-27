@@ -240,5 +240,95 @@
             setcookie(ACCESS_TOKEN_NAME, '', -1, '/');
             return $success;
         }
+
+        /**
+         * Gets all the athmosphere descriptions
+         * 
+         * @return array of all the athmosphere description.
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getDescrAthmo(): array {
+            $request = 'SELECT * FROM descr_athmo';
+
+            $query = $this->PDO->prepare($request);
+            $query->execute();
+
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result;
+        }
+
+        /**
+         * Gets all the athmosphere descriptions
+         * 
+         * @return array of all the athmosphere description.
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getDescrLum(): array {
+            $request = 'SELECT * FROM descr_lum';
+
+            $query = $this->PDO->prepare($request);
+            $query->execute();
+
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result;
+        }
+
+        /**
+         * Gets all the athmosphere descriptions
+         * 
+         * @return array of all the athmosphere description.
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getDescrEtatSurf(): array {
+            $request = 'SELECT * FROM descr_etat_surf';
+
+            $query = $this->PDO->prepare($request);
+            $query->execute();
+
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result;
+        }
+
+        /**
+         * Gets all the athmosphere descriptions
+         * 
+         * @return array of all the athmosphere description.
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getDescrDispoSecu(): array {
+            $request = 'SELECT * FROM descr_dispo_secu';
+
+            $query = $this->PDO->prepare($request);
+            $query->execute();
+
+            $result = $query->fetchAll(PDO::FETCH_OBJ);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result;
+        }
+
+        
     }
 ?>

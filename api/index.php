@@ -89,6 +89,38 @@
     }
 
     switch ($pathInfo[0] . $_SERVER['REQUEST_METHOD']) {
+        case 'descr_athmo' . 'GET' :
+            http_response_code(200);
+            try {
+                die(json_encode($db->getDescrAthmo()));
+            } catch (Exception $e) {
+                APIErrors::internalError();
+            }
+
+        case 'descr_lum' . 'GET' :
+            http_response_code(200);
+            try {
+                die(json_encode($db->getDescrLum()));
+            } catch (Exception $e) {
+                APIErrors::internalError();
+            }
+        
+        case 'descr_etat_surf' . 'GET' :
+            http_response_code(200);
+            try {
+                die(json_encode($db->getDescrEtatSurf()));
+            } catch (Exception $e) {
+                APIErrors::internalError();
+            }
+
+        case 'descr_dispo_secu' . 'GET' :
+            http_response_code(200);
+            try {
+                die(json_encode($db->getDescrDispoSecu()));
+            } catch (Exception $e) {
+                APIErrors::internalError();
+            }
+
         case 'test' . 'GET' :
             http_response_code(200);
             die(json_encode(array(
