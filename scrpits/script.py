@@ -229,9 +229,27 @@ with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
         department_name = row[21].strip()
         region_number = row[23].strip()
 
-        grav_name = dico_grav.get(descr_grav)
-        region_name = dico_region.get(region_number)
 
+        region_name = None
+        for key, value in dico_region.items():
+            if value == region_number:
+                region_name = key
+                break
+
+        # Handle missing region_name
+        if region_name is None:
+            continue
+
+        grav_name = None
+        for key, value in dico_grav.items():
+            if key == descr_grav:
+                grav_name = value
+                break
+
+        # Handle missing grav_name
+        if grav_name is None:
+            continue
+        
         # Insertion des données dans la table "accident"
         mycursor.execute("""
             INSERT INTO accident (Num_Acc, date, id_code_insee, ville, latitude, longitude, descr_grav, grav_name, department_number, department_name, region_number, region_name) 
