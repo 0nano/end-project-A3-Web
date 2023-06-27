@@ -1,3 +1,11 @@
+DROP TABLE IF EXISTS accident;  
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS descr_athmo;
+DROP TABLE IF EXISTS descr_lum;
+DROP TABLE IF EXISTS descr_etat_surf;
+DROP TABLE IF EXISTS descr_dispo_secu;
+
+
 CREATE TABLE users (
     mail VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -28,12 +36,6 @@ CREATE TABLE descr_dispo_secu (
     PRIMARY KEY (id_secu)
 );
 
-CREATE TABLE centroid (
-    id_centroid INT AUTO_INCREMENT NOT NULL,
-    latitude FLOAT NOT NULL,
-    longitude FLOAT NOT NULL,
-    PRIMARY KEY (id_centroid)
-);
 
 CREATE TABLE accident (
     Num_Acc INT NOT NULL,
@@ -65,6 +67,5 @@ CREATE TABLE accident (
     CONSTRAINT accident_FK_descr_lum FOREIGN KEY (descr_lum) REFERENCES descr_lum (id_lum),
     CONSTRAINT accident_FK_descr_etat_surf FOREIGN KEY (descr_etat_surf) REFERENCES descr_etat_surf (id_surf),
     CONSTRAINT accident_FK_descr_dispo_secu FOREIGN KEY (descr_dispo_secu) REFERENCES descr_dispo_secu (id_secu),
-    CONSTRAINT accident_FK_users FOREIGN KEY (users) REFERENCES users (mail),
-    CONSTRAINT accident_FK_centroid FOREIGN KEY (centroid) REFERENCES centroid (id_centroid)
+    CONSTRAINT accident_FK_users FOREIGN KEY (users) REFERENCES users (mail)
 ) ENGINE=InnoDB;
