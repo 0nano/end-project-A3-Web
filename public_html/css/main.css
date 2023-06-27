@@ -97,7 +97,7 @@ margin-right: 2%;
 }
 
 .header-icon {
-  color: white;
+  color: var(--white);
   font-size: 24px;
 }
 
@@ -226,6 +226,7 @@ footer {
   margin-top: 6%;
   margin-left: 10%;
   border-radius: 35px;
+  display: flex;
 }
 
 .upper-title{
@@ -240,19 +241,14 @@ footer {
 
 
 
-
-
 .form-container {
   max-width: 400px;
   margin: 0 auto;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .form-field {
   margin-bottom: 15px;
+  margin-top: 5%;
 }
 
 .form-label {
@@ -283,17 +279,29 @@ footer {
   padding: 10px;
   border: none;
   border-radius: 3px;
-  background-color: #4caf50;
-  color: #ffffff;
+  background-color: var(--yellow);
+  color: var(--green);
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
 }
 
 .form-button:hover {
-  background-color: #45a049;
+  background-color: var(--grey);
 }
 
+
+
+.left-form{
+  width: 50%;
+  height: 100%;
+  margin-left:0%;
+}
+
+.right-form{
+height: 100%;
+width: 50%;  
+}
 /* VISUALISATION*/
 
 .visu-list{
