@@ -1,6 +1,6 @@
 # Importation des librairies
 import mysql.connector
-import os
+import csv
 
 # Connection a la base de donnees
 mydb = mysql.connector.connect(
@@ -180,4 +180,65 @@ with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
             mydb.commit()
             descriptions.add(description)  # Ajout de la description au set pour éviter les doublons
 
+
+#################### DESCR_GRAV ####################
+
+dico_grav = {
+    "Indemne": 0,
+    "Tué": 3,
+    "Blessé hospitalisé": 2,
+    "Blessé léger": 1,
+}
+
+dico_region = {
+    'auvergne-rhône-alpes': 84,
+    'bourgogne-franche-comté': 27,
+    'bretagne': 53,
+    'centre-val de loire': 24,
+    'corse': 94,
+    'grand est': 44,
+    'guadeloupe': 1,
+    'guyane': 3,
+    'hauts-de-france': 32,
+    'île-de-france': 11,
+    'la réunion': 4,
+    'martinique': 2,
+    'normandie': 28,
+    'nouvelle-aquitaine': 75,
+    'occitanie': 76,
+    'pays de la loire': 52,
+    'provence-alpes-côte d\'azur': 93,
+}
+
+# Lecture du fichier CSV
+with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
+    csv_data = csv.reader(file)
+    next(csv_data)  # Ignorer la première ligne (en-tête)
+
+    for row in csv_data:
+        # Récupération des valeurs du CSV
+        num_acc = int(row[1].strip())
+        date = row[4].strip()
+        id_code_insee = int(row[0].strip())
+        ville = row[5].strip()
+        latitude = float(row[6].strip())
+        longitude = float(row[7].strip())
+        descr_grav = row[18].strip()
+        department_number = row[22].strip()
+        department_name = row[21].strip()
+        region_number = row[23].strip()
+
+        grav_name = dico_grav.get(descr_grav)
+        region_name = dico_region.get(region_number)
+
+        # Insertion des données dans la table "accident"
+        mycursor.execute("""
+            INSERT INTO accident (Num_Acc, date, id_code_insee, ville, latitude, longitude, descr_grav, grav_name, department_number, department_name, region_number, region_name) 
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (num_acc, date, id_code_insee, ville, latitude, longitude, descr_grav, grav_name, department_number, department_name, region_number, region_name))
+
+        mydb.commit()
+
+# Fermeture de la connexion à la base de données
+mycursor.close()
 mydb.close()

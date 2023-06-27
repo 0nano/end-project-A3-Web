@@ -39,7 +39,7 @@ CREATE TABLE descr_dispo_secu (
 
 
 CREATE TABLE accident (
-    Num_Acc INT NOT NULL,
+    Num_Acc BIGINT,
     date INT NOT NULL,
     id_code_insee INT NOT NULL,
     ville VARCHAR(255) NOT NULL,
