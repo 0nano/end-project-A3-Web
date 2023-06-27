@@ -15,7 +15,7 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 # Récupère les commandes de model.sql et les exécute
-with open('../end-project-A3-Web/sql/model.sql', 'r') as file:
+with open('../sql/model.sql', 'r') as file:
     sql_statements = file.read()
 
 # Exécute les commandes SQL une par une
@@ -36,7 +36,7 @@ dico_lum = {
     "Nuit avec éclairage public non allumé": 5
 }
 
-with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
+with open('datas.csv', 'r') as file:
     descriptions = set()  # Utilisation d'un set pour stocker les descriptions uniques
     first_line = True  # Variable pour suivre la première ligne
 
@@ -75,7 +75,7 @@ dico_athmo = {
     "Autre": 9
 }
 
-with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
+with open('datas.csv', 'r') as file:
     descriptions = set()  # Utilisation d'un set pour stocker les descriptions uniques
     first_line = True  # Variable pour suivre la première ligne
 
@@ -113,7 +113,7 @@ dico_etat_surf = {
     "Autre": 9,
 }
 
-with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
+with open('datas.csv', 'r') as file:
     descriptions = set()  # Utilisation d'un set pour stocker les descriptions uniques
     first_line = True  # Variable pour suivre la première ligne
 
@@ -157,7 +157,7 @@ dico_dispo_secu = {
     "Présence équipement réfléchissant - Utilisation non déterminable": 15,
 }
 
-with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
+with open('datas.csv', 'r') as file:
     descriptions = set()  # Utilisation d'un set pour stocker les descriptions uniques
     first_line = True  # Variable pour suivre la première ligne
 
@@ -212,7 +212,7 @@ dico_region = {
 }
 
 # Lecture du fichier CSV
-with open('../end-project-A3-Web/scrpits/datas.csv', 'r') as file:
+with open('datas.csv', 'r') as file:
     csv_data = csv.reader(file)
     next(csv_data)  # Ignorer la première ligne (en-tête)
 
