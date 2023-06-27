@@ -14,4 +14,14 @@
      * This exception is thrown when the user is not found in the database.
      */
     class UserNotFound extends Exception {}
+
+    /**
+     * This exception is thrown when the user doesn't have an access token.
+     */
+    class UserAccessTokenNotFound extends Exception {}
+
+    /**
+     * This exception is thrown when there is a problem with the connection to the database.
+     */
+    class ConnectionException extends Exception {}
 ?>
