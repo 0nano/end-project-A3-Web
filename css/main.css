@@ -105,13 +105,14 @@ footer {
 
 .footer-textbox{
   display: flex;
-  height: 80%;
+  height: 8%;
   width: 28%;
   margin: 10px;
   margin-left: 5%;
   background-color: var(--grey);
   border-radius: 30px;
   padding: 10px;
+  position: fixed;
 }
 
 
@@ -123,7 +124,8 @@ footer {
   font-family: 'Raleway', sans-serif;
 }
 .footer-img{
-  margin-left:53%;
+  margin-top: -1%;
+  margin-left:90%;
 }
 
 
