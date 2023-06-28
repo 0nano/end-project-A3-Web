@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS descr_dispo_secu;
 
 CREATE TABLE users (
     mail VARCHAR(255) NOT NULL,
+    prenom VARCHAR(255) NOT NULL,
+    nom VARCHAR(255) NOT NULL,
     access_token VARCHAR(255),
     password VARCHAR(255) NOT NULL,
     PRIMARY KEY (mail)
