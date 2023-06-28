@@ -9,5 +9,5 @@
     header('content-type: application/json; charset=utf-8');
 
     $db = new Database();
-    $db->predictionCluster();
+    $db->predictionCluster(45, 0.7);
 ?>
