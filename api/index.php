@@ -124,29 +124,46 @@
         case 'accidents' . 'GET' :
             http_response_code(200);
             if (isset($_GET["filtre"])) {
-                try {
-                    $filtre = array();
-                    if (isset($_GET["athmo"])) {
-                        $filtre["athmo"] = $_GET["athmo"];
+                $filtre = array();
+                if (isset($_GET["athmo"])) {
+                    $filtre["athmo"] = $_GET["athmo"];
+                }
+                if (isset($_GET["lum"])) {
+                    $filtre["lum"] = $_GET["lum"];
+                }
+                if (isset($_GET["etat_surf"])) {
+                    $filtre["etat_surf"] = $_GET["etat_surf"];
+                }
+                if (isset($_GET["dispo_secu"])) {
+                    $filtre["dispo_secu"] = $_GET["dispo_secu"];
+                }
+                    
+                if (isset($_GET["offset"])) {
+                    try {
+                        die(json_encode($db->getAllAccidentsWithFiltre($filtre, $_GET["offset"])));
+                    } catch (Exception $e) {
+                        APIErrors::internalError();
                     }
-                    if (isset($_GET["lum"])) {
-                        $filtre["lum"] = $_GET["lum"];
+                } else {
+                    try {
+                        die(json_encode($db->getAllAccidentsWithFiltre($filtre)));
+                    } catch (Exception $e) {
+                        APIErrors::internalError();
                     }
-                    if (isset($_GET["etat_surf"])) {
-                        $filtre["etat_surf"] = $_GET["etat_surf"];
-                    }
-                    if (isset($_GET["dispo_secu"])) {
-                        $filtre["dispo_secu"] = $_GET["dispo_secu"];
-                    }
-                    die(json_encode($db->getAllAccidentsWithFiltre($_GET["filtre"])));
-                } catch (Exception $e) {
-                    APIErrors::internalError();
                 }
             } else {
-                try {
-                    die(json_encode($db->getAllAccidents()));
-                } catch (Exception $e) {
-                    APIErrors::internalError();
+                if (isset($_GET["offset"])) {
+                    try {
+                        die(json_encode($db->getAllAccidents($_GET["offset"])));
+                    } catch (Exception $e) {
+                        APIErrors::internalError();
+                    }
+                } else {
+                    try {
+                        die(json_encode($db->getAllAccidents()));
+                    } catch (Exception $e) {
+                        APIErrors::internalError();
+                    }
                 }
             }
         

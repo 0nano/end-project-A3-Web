@@ -333,11 +333,13 @@
          * Gets all the accidents descriptions
          * left join by all the descriptions tables
          * 
+         * @param int $offset the offset of the request to get the next 20 accidents.
+         * 
          * @return array of all the accidents description.
          * 
          * @throws ConnectionException if the array is empty.
          */
-        public function getAllAccidents(): ?array {
+        public function getAllAccidents(int $offset = 0): ?array {
             $request = 'SELECT id_accident , Num_Acc , date , id_code_insee , ville ,
                         latitude , longitude , descr_grav , department_number ,
                         department_name , region_number , descr_athmo , a.description "athmo_descr", 
@@ -346,9 +348,10 @@
                         LEFT JOIN descr_athmo a ON descr_athmo = id_athmo
                         LEFT JOIN descr_lum l ON descr_lum = id_lum
                         LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
-                        LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu';
+                        LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu LIMIT 20 OFFSET :debut';
 
             $query = $this->PDO->prepare($request);
+            $query->bindParam(':debut', $offset * 20);
             $query->execute();
 
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -367,11 +370,13 @@
          * 
          * @param array $filtre
          * 
+         * @param int $offset the offset of the request to get the next 20 accidents.
+         * 
          * @return ?array of all the accidents description.
          * 
          * @throws ConnectionException if the array is empty.
          */
-        public function getAllAccidentsWithFiltre(array $filtre): ?array {
+        public function getAllAccidentsWithFiltre(array $filtre, int $offset = 0): ?array {
             $conditins = '';
             
             if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
@@ -406,7 +411,7 @@
                         LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
                         LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu';
 
-            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins);
+            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins .' LIMIT 20 OFFSET :debut');
             if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
                 $query->bindParam(':athmo', $filtre['athmo']);
             }
@@ -419,6 +424,7 @@
             if (isset($filtre['dispo_secu']) && $filtre['dispo_secu'] != '') {
                 $query->bindParam(':dispo_secu', $filtre['dispo_secu']);
             }
+            $query->bindParam(':debut', $offset * 20);
             $query->execute();
 
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
