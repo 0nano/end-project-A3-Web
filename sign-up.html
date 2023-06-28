@@ -5,7 +5,7 @@
     <script src='https://cdn.plot.ly/plotly-2.24.1.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js'></script>
     <script src="./public_html/js/script.js"></script>
-    <title>Visualisation</title></head>
+    <title>Inscription</title></head>
     <link rel="icon" type="image/x-icon" href="./public_html/img/wheel.png">
     <body>
         <header>
@@ -15,10 +15,10 @@
           <div class="title" style="margin-right: 29%;"><h1 class="text">Inscription</h1></div>
           <div class="header-boxes">  
             <div class="header-box">
-              <a href="visualisation.html"><img src="./public_html/img/back.png" class="icon"></a>
+              <a href="index.html"><img src="./public_html/img/back.png" class="icon"></a>
             </div>  
             <div class="header-box">
-              <a href="index.html"><img src="./public_html/img/sign-in.png" class="icon"></a>
+              <a href="connexion.html"><img src="./public_html/img/sign-in.png" class="icon"></a>
             </div>
           </div>
           </header>
@@ -27,8 +27,36 @@
               <div class="upper-visu">
                 <br><h2>Nouvel utilisateur : </h2>
               </div>
-              <div class="lower-visu-carte">
-               
+              <div class="lower-visu-sign" style="height: 40%;">
+                
+                <div class="form-sign">
+                  <form>  
+                    <div class="form-field">
+                      <label for="Nom" class="form-label">Nom:</label>
+                      <input type="number" id="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-field">
+                      <label for="firstname" class="form-label">Prenom:</label>
+                      <input type="text" id="firstname" class="form-input" required>
+                    </div>
+
+                        
+                    <div class="form-field">
+                      <label for="mail" class="form-label">E-mail:</label>
+                      <input type="text" id="mail" class="form-input" required>
+                    </div>
+
+                        
+                    <div class="form-field">
+                      <label for="mdp" class="form-label">Mot De Passe:</label>
+                      <input type="password" id="mdp" class="form-input" required>
+                    </div>
+
+                    <button type="submit" class="form-button">Terminé</button>
+
+                  </form>
+                </div>
               </div>
             </div>
             <div>

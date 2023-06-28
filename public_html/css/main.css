@@ -417,3 +417,23 @@ border-radius: 35px;
 
 }
 
+
+
+
+/*  INCRIPTION*/
+
+.lower-visu-sign{
+  margin-top: 1%;
+  background-color: var(--white);
+  width: 28%;
+  margin-left: 36%;
+  border-radius: 35px;
+  position: fixed;
+}
+
+
+.form-sign{
+  width: 80%;
+  margin-left: 10%;
+}
+/*  Connexion*/
