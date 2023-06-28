@@ -234,7 +234,7 @@ with open('datas.csv', 'r') as file:
 
    
         # Insertion des données dans la table "accident"
-        mycursor.execute("INSERT INTO accident (Num_Acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (num_acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number))
+        mycursor.execute("INSERT INTO accident (Num_Acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (num_acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu))
         mydb.commit()
 
 # Fermeture de la connexion à la base de données
