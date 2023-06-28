@@ -350,8 +350,10 @@
                         LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
                         LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu LIMIT 20 OFFSET :debut';
 
+            $finalOffset = $offset * 20;
+
             $query = $this->PDO->prepare($request);
-            $query->bindParam(':debut', $offset * 20, PDO::PARAM_INT);
+            $query->bindParam(':debut', $finalOffset, PDO::PARAM_INT);
             $query->execute();
 
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
