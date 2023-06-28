@@ -517,7 +517,7 @@
             }
             $query->execute();
 
-            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            $result = $query->fetch(PDO::FETCH_ASSOC);
 
             if(!$result){
                 throw new ConnectionException();
