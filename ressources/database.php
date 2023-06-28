@@ -527,10 +527,17 @@
         }
     
         /**
+         * Gets the cluster of a given latitude and longitude.
          * 
+         * @param float $latitude
+         * @param float $longitude
+         * 
+         * @return string the cluster of a given latitude and longitude.
+         * 
+         * @throws PythonScriptException if the python script is empty.
          */
         public function predictionCluster(float $latitude, float $longitude): string{
-            exec("python3 ../scrpits/pred_cluster.py $latitude $longitude ../ressources/centroids.csv", $output);
+            exec("python3 ../scrpits/pred_cluster.py " . $latitude . " " . $longitude . "../ressources/centroids.csv", $output);
 
             if (empty($output)) {
                 throw new PythonScriptException();
