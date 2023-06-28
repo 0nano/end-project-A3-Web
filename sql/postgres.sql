@@ -45,7 +45,7 @@ CREATE TABLE accident (
     descr_grav INT,
     department_number INT NOT NULL,
     department_name VARCHAR(255) NOT NULL,
-    region_number INT NOT NULL,
+    region_number INT,
     descr_athmo INT NOT NULL,
     descr_lum INT NOT NULL,
     descr_etat_surf INT NOT NULL,

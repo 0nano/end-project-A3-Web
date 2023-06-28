@@ -1,13 +1,19 @@
+# -*- coding: utf-8 -*-
 import psycopg2
+import psycopg2.extensions
 import csv
+
+# Activation de la prise en charge Unicode
+psycopg2.extensions.register_type(psycopg2.extensions.UNICODE)
 
 # Connexion à la base de données
 conn = psycopg2.connect(
     host="localhost",
     user="etu724",
-    port="5432",  
+    port="5432",
     password="unjvjhys",
-    database="etu724"
+    database="etu724",
+    options="-c client_encoding=utf8"
 )
 
 # Création du curseur
@@ -21,7 +27,6 @@ with open('../sql/postgres.sql', 'r') as file:
 cursor.execute(sql_statements)
 conn.commit()
 
-
 #################### DESCR_LUM ####################
 # Dictionnaire pour convertir les descriptions en id
 dico_lum = {
@@ -32,7 +37,7 @@ dico_lum = {
     "Nuit avec éclairage public non allumé": 5
 }
 
-with open('datas.csv', 'r') as file:
+with open('datas.csv', 'r', encoding='utf-8') as file:
     descriptions = set()
     first_line = True
 
@@ -51,7 +56,7 @@ with open('datas.csv', 'r') as file:
                 break
 
         if description is not None and description not in descriptions:
-            cursor.execute("INSERT INTO descr_lum (description) VALUES (%s) ON CONFLICT DO NOTHING", (description,))
+            cursor.execute("INSERT INTO descr_lum (description) VALUES (%s)", (description,))
             conn.commit()
             descriptions.add(description)
 
@@ -70,7 +75,7 @@ dico_athmo = {
     "Autre": 9
 }
 
-with open('datas.csv', 'r') as file:
+with open('datas.csv', 'r', encoding='utf-8') as file:
     descriptions = set()
     first_line = True
 
@@ -96,7 +101,7 @@ with open('datas.csv', 'r') as file:
 
 #################### DESCR_ETAT_SURF ####################
 # Dictionnaire pour convertir les descriptions en id
-dico_etat_surf = {    
+dico_etat_surf = {
     "Verglacée": 1,
     "Enneigée": 2,
     "Mouillée": 3,
@@ -108,7 +113,7 @@ dico_etat_surf = {
     "Autre": 9,
 }
 
-with open('datas.csv', 'r') as file:
+with open('datas.csv', 'r', encoding='utf-8') as file:
     descriptions = set()
     first_line = True
 
@@ -152,7 +157,7 @@ dico_dispo_secu = {
     "Présence équipement réfléchissant - Utilisation non déterminable": 15,
 }
 
-with open('datas.csv', 'r') as file:
+with open('datas.csv', 'r', encoding='utf-8') as file:
     descriptions = set()
     first_line = True
 
@@ -178,35 +183,8 @@ with open('datas.csv', 'r') as file:
 
 #################### DESCR_GRAV ####################
 
-dico_grav = {
-    "Indemne": 0,
-    "Tué": 3,
-    "Blessé hospitalisé": 2,
-    "Blessé léger": 1,
-}
-
-dico_region = {
-    'auvergne-rhône-alpes': 84,
-    'bourgogne-franche-comté': 27,
-    'bretagne': 53,
-    'centre-val de loire': 24,
-    'corse': 94,
-    'grand est': 44,
-    'guadeloupe': 1,
-    'guyane': 3,
-    'hauts-de-france': 32,
-    'île-de-france': 11,
-    'la réunion': 4,
-    'martinique': 2,
-    'normandie': 28,
-    'nouvelle-aquitaine': 75,
-    'occitanie': 76,
-    'pays de la loire': 52,
-    'provence-alpes-côte d\'azur': 93,
-}
-
 # Lecture du fichier CSV
-with open('datas.csv', 'r') as file:
+with open('datas.csv', 'r', encoding='utf-8') as file:
     csv_data = csv.reader(file)
     next(csv_data)
 
@@ -217,23 +195,19 @@ with open('datas.csv', 'r') as file:
         ville = row[5].strip()
         latitude = float(row[6].strip())
         longitude = float(row[7].strip())
-        descr_grav = row[18].strip()
+        descr_grav = int(row[18].strip())
         department_number = row[22].strip()
         department_name = row[21].strip()
-        region_number = row[23].strip()
+        region_number = int(row[23].strip())
         descr_athmo = row[10].strip()
         descr_lum = row[11].strip()
         descr_etat_surf = row[12].strip()
         descr_dispo_secu = row[17].strip()
 
-        # Convertir la description de gravité en ID
-        grav_id = dico_grav.get(descr_grav)
-
-        # Convertir le nom de région en numéro de région
-        region_number = dico_region.get(region_number.lower())
+        
 
         cursor.execute("INSERT INTO accident (Num_Acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",
-                       (num_acc, date, id_code_insee, ville, latitude, longitude, grav_id, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu))
+                       (num_acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu))
         conn.commit()
 
 # Fermer la connexion à la base de données
