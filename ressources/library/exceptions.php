@@ -24,4 +24,9 @@
      * This exception is thrown when there is a problem with the connection to the database.
      */
     class ConnectionException extends Exception {}
+
+    /**
+     * This exception is thrown when the python script does not work. 
+     */
+    class PythonScriptException extends Exception {}
 ?>

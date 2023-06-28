@@ -6,7 +6,8 @@
     require_once '../ressources/config.php';
     require_once '../ressources/database.php';
 
-    $db = new Database();
+    header('content-type: application/json; charset=utf-8');
 
+    $db = new Database();
     $db->predictionCluster();
 ?>

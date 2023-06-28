@@ -529,17 +529,15 @@
         /**
          * 
          */
-        public function predictionCluster() {
-            $latitude = 42.0;
-            $longitude = 2.0;
-            exec("python3 ../scrpits/pred_cluster.py 45 0.7 ../resources/centroids.csv", $output);
+        public function predictionCluster(float $latitude, float $longitude): string{
+            exec("python3 ../scrpits/pred_cluster.py $latitude $longitude ../ressources/centroids.csv", $output);
 
-            if (!empty($output)) {
-                $output = json_decode($output[0]);
-                echo $output;
-            } else {
-                echo "No output received.";
+            if (empty($output)) {
+                throw new PythonScriptException();
             }
+            
+            $output = json_decode($output[0]);
+            return json_encode($output);
         }        
     }
 ?>
