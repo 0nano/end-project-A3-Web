@@ -351,7 +351,7 @@
                         LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu LIMIT 20 OFFSET :debut';
 
             $query = $this->PDO->prepare($request);
-            $query->bindParam(':debut', $offset * 20);
+            $query->bindParam(':debut', $offset * 20, PDO::PARAM_INT);
             $query->execute();
 
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
