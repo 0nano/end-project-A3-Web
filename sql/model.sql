@@ -39,6 +39,7 @@ CREATE TABLE descr_dispo_secu (
 
 
 CREATE TABLE accident (
+    id_accident INT AUTO_INCREMENT NOT NULL,
     Num_Acc BIGINT,
     date DATE,
     id_code_insee INT NOT NULL,
@@ -57,7 +58,7 @@ CREATE TABLE accident (
     descr_dispo_secu INT NOT NULL,
     users VARCHAR(255) NOT NULL,
     centroid INT NOT NULL,
-    PRIMARY KEY (Num_Acc),
+    PRIMARY KEY (id_accident),
     INDEX FK_descr_athmo (descr_athmo),
     INDEX FK_descr_lum (descr_lum),
     INDEX FK_descr_etat_surf (descr_etat_surf),
