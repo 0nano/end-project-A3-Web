@@ -210,29 +210,29 @@ dico_region = {
     'provence-alpes-côte d\'azur': 93,
 }
 
-# Lecture du fichier CSV
-with open('datas.csv', 'r') as file:
-    csv_data = csv.reader(file)
-    next(csv_data)  # Ignorer la première ligne (en-tête)
+# # Lecture du fichier CSV
+# with open('datas.csv', 'r') as file:
+#     csv_data = csv.reader(file)
+#     next(csv_data)  # Ignorer la première ligne (en-tête)
 
-    for row in csv_data:
-        # Récupération des valeurs du CSV
-        num_acc = int(row[1].strip())
-        date = row[4].strip()
-        id_code_insee = int(row[0].strip())
-        ville = row[5].strip()
-        latitude = float(row[6].strip())
-        longitude = float(row[7].strip())
-        descr_grav = row[18].strip()
-        department_number = row[22].strip()
-        department_name = row[21].strip()
-        region_number = row[23].strip()
+#     for row in csv_data:
+#         # Récupération des valeurs du CSV
+#         num_acc = int(row[1].strip())
+#         date = row[4].strip()
+#         id_code_insee = int(row[0].strip())
+#         ville = row[5].strip()
+#         latitude = float(row[6].strip())
+#         longitude = float(row[7].strip())
+#         descr_grav = row[18].strip()
+#         department_number = row[22].strip()
+#         department_name = row[21].strip()
+#         region_number = row[23].strip()
 
 
    
-        # Insertion des données dans la table "accident"
-        mycursor.execute("INSERT INTO accident (Num_Acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (num_acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number))
-        mydb.commit()
+#         # Insertion des données dans la table "accident"
+#         mycursor.execute("INSERT INTO accident (Num_Acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (num_acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number))
+#         mydb.commit()
 
 # Fermeture de la connexion à la base de données
 mycursor.close()
