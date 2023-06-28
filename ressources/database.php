@@ -439,5 +439,91 @@
 
             return $result;
         }
+
+        /**
+         * Gets the length of getAllAccidents
+         * 
+         * @return int the length of getAllAccidents
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getAllAccidentsLength(): int {
+            $request = 'SELECT COUNT(*) "n" FROM accident';
+
+            $query = $this->PDO->prepare($request);
+            $query->execute();
+
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result['n'];
+        }
+
+        /**
+         * Gets the length of getAllAccidentsWithFiltre
+         * 
+         * @param array $filtre
+         * 
+         * @return int the length of getAllAccidentsWithFiltre
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getAllAccidentsWithFiltreLength(array $filtre): int {
+            $conditins = '';
+            
+            if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
+                $conditins .= 'descr_athmo = :athmo';
+            }
+            if (isset($filtre['lum']) && $filtre['lum'] != '') {
+                if ($conditins != '') {
+                    $conditins .= ' AND ';
+                }
+                $conditins .= 'descr_lum = :lum';
+            }
+            if (isset($filtre['etat_surf']) && $filtre['etat_surf'] != '') {
+                if ($conditins != '') {
+                    $conditins .= ' AND ';
+                }
+                $conditins .= 'descr_etat_surf = :etat_surf';
+            }
+            if (isset($filtre['dispo_secu']) && $filtre['dispo_secu'] != '') {
+                if ($conditins != '') {
+                    $conditins .= ' AND ';
+                }
+                $conditins .= 'descr_dispo_secu = :dispo_secu';
+            }
+
+            $request = 'SELECT count(id_accident) "n" FROM accident
+                        LEFT JOIN descr_athmo a ON descr_athmo = id_athmo
+                        LEFT JOIN descr_lum l ON descr_lum = id_lum
+                        LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
+                        LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu';
+
+            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins);
+            if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
+                $query->bindParam(':athmo', $filtre['athmo']);
+            }
+            if (isset($filtre['lum']) && $filtre['lum'] != '') {
+                $query->bindParam(':lum', $filtre['lum']);
+            }
+            if (isset($filtre['etat_surf']) && $filtre['etat_surf'] != '') {
+                $query->bindParam(':etat_surf', $filtre['etat_surf']);
+            }
+            if (isset($filtre['dispo_secu']) && $filtre['dispo_secu'] != '') {
+                $query->bindParam(':dispo_secu', $filtre['dispo_secu']);
+            }
+            $query->execute();
+
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result['n'];
+        }
     }
 ?>
