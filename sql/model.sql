@@ -66,6 +66,5 @@ CREATE TABLE accident (
     CONSTRAINT accident_FK_descr_athmo FOREIGN KEY (descr_athmo) REFERENCES descr_athmo (id_athmo),
     CONSTRAINT accident_FK_descr_lum FOREIGN KEY (descr_lum) REFERENCES descr_lum (id_lum),
     CONSTRAINT accident_FK_descr_etat_surf FOREIGN KEY (descr_etat_surf) REFERENCES descr_etat_surf (id_surf),
-    CONSTRAINT accident_FK_descr_dispo_secu FOREIGN KEY (descr_dispo_secu) REFERENCES descr_dispo_secu (id_secu),
-    CONSTRAINT accident_FK_users FOREIGN KEY (users) REFERENCES users (mail)
+    CONSTRAINT accident_FK_descr_dispo_secu FOREIGN KEY (descr_dispo_secu) REFERENCES descr_dispo_secu (id_secu)
 ) ENGINE=InnoDB;
