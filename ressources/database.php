@@ -413,6 +413,8 @@
                         LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
                         LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu';
 
+            $finalOffset = $offset * 20;
+
             $query = $this->PDO->prepare($request. ' WHERE ' .$conditins .' LIMIT 20 OFFSET :debut');
             if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
                 $query->bindParam(':athmo', $filtre['athmo']);
@@ -426,7 +428,7 @@
             if (isset($filtre['dispo_secu']) && $filtre['dispo_secu'] != '') {
                 $query->bindParam(':dispo_secu', $filtre['dispo_secu']);
             }
-            $query->bindParam(':debut', $offset * 20);
+            $query->bindParam(':debut', $finalOffset, PDO::PARAM_INT);
             $query->execute();
 
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
