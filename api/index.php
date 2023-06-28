@@ -121,6 +121,35 @@
                 APIErrors::internalError();
             }
 
+        case 'accidents' . 'GET' :
+            http_response_code(200);
+            if (isset($_GET["filtre"])) {
+                try {
+                    $filtre = array();
+                    if (isset($_GET["athmo"])) {
+                        $filtre["athmo"] = $_GET["athmo"];
+                    }
+                    if (isset($_GET["lum"])) {
+                        $filtre["lum"] = $_GET["lum"];
+                    }
+                    if (isset($_GET["etat_surf"])) {
+                        $filtre["etat_surf"] = $_GET["etat_surf"];
+                    }
+                    if (isset($_GET["dispo_secu"])) {
+                        $filtre["dispo_secu"] = $_GET["dispo_secu"];
+                    }
+                    die(json_encode($db->getAllAccidentsWithFiltre($_GET["filtre"])));
+                } catch (Exception $e) {
+                    APIErrors::internalError();
+                }
+            } else {
+                try {
+                    die(json_encode($db->getAllAccidents()));
+                } catch (Exception $e) {
+                    APIErrors::internalError();
+                }
+            }
+        
         case 'test' . 'GET' :
             http_response_code(200);
             die(json_encode(array(

@@ -264,7 +264,7 @@
         }
 
         /**
-         * Gets all the athmosphere descriptions
+         * Gets all the luminosity descriptions
          * 
          * @return array of all the athmosphere description.
          * 
@@ -286,7 +286,7 @@
         }
 
         /**
-         * Gets all the athmosphere descriptions
+         * Gets all the surface descriptions
          * 
          * @return array of all the athmosphere description.
          * 
@@ -308,7 +308,7 @@
         }
 
         /**
-         * Gets all the athmosphere descriptions
+         * Gets all the security descriptions
          * 
          * @return array of all the athmosphere description.
          * 
@@ -329,6 +329,105 @@
             return $result;
         }
 
-        
+        /**
+         * Gets all the accidents descriptions
+         * left join by all the descriptions tables
+         * 
+         * @return array of all the accidents description.
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getAllAccidents(): ?array {
+            $request = 'SELECT id_accident , Num_Acc , date , id_code_insee , ville ,
+                        latitude , longitude , descr_grav , department_number ,
+                        department_name , region_number , descr_athmo , a.description "athmo_descr", 
+                        descr_lum, l.description "lum_descr", descr_etat_surf , es.description "etat_surf_descr",
+                        descr_dispo_secu , ds.description "dispo_secu_descr" FROM accident
+                        LEFT JOIN descr_athmo a ON descr_athmo = id_athmo
+                        LEFT JOIN descr_lum l ON descr_lum = id_lum
+                        LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
+                        LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu';
+
+            $query = $this->PDO->prepare($request);
+            $query->execute();
+
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result;
+        }
+
+        /**
+         * Gets all the accidents descriptions
+         * left join by all the descriptions tables
+         * with a filtre on all descriptions tables
+         * 
+         * @param array $filtre
+         * 
+         * @return ?array of all the accidents description.
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getAllAccidentsWithFiltre(array $filtre): ?array {
+            $conditins = '';
+            
+            if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
+                $conditins .= 'descr_athmo = :athmo';
+            }
+            if (isset($filtre['lum']) && $filtre['lum'] != '') {
+                if ($conditins != '') {
+                    $conditins .= ' AND ';
+                }
+                $conditins .= 'descr_lum = :lum';
+            }
+            if (isset($filtre['etat_surf']) && $filtre['etat_surf'] != '') {
+                if ($conditins != '') {
+                    $conditins .= ' AND ';
+                }
+                $conditins .= 'descr_etat_surf = :etat_surf';
+            }
+            if (isset($filtre['dispo_secu']) && $filtre['dispo_secu'] != '') {
+                if ($conditins != '') {
+                    $conditins .= ' AND ';
+                }
+                $conditins .= 'descr_dispo_secu = :dispo_secu';
+            }
+
+            $request = 'SELECT id_accident , Num_Acc , date , id_code_insee , ville ,
+                        latitude , longitude , descr_grav , department_number ,
+                        department_name , region_number , descr_athmo , a.description "athmo_descr", 
+                        descr_lum, l.description "lum_descr", descr_etat_surf , es.description "etat_surf_descr",
+                        descr_dispo_secu , ds.description "dispo_secu_descr" FROM accident
+                        LEFT JOIN descr_athmo a ON descr_athmo = id_athmo
+                        LEFT JOIN descr_lum l ON descr_lum = id_lum
+                        LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
+                        LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu';
+
+            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins);
+            if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
+                $query->bindParam(':athmo', $filtre['athmo']);
+            }
+            if (isset($filtre['lum']) && $filtre['lum'] != '') {
+                $query->bindParam(':lum', $filtre['lum']);
+            }
+            if (isset($filtre['etat_surf']) && $filtre['etat_surf'] != '') {
+                $query->bindParam(':etat_surf', $filtre['etat_surf']);
+            }
+            if (isset($filtre['dispo_secu']) && $filtre['dispo_secu'] != '') {
+                $query->bindParam(':dispo_secu', $filtre['dispo_secu']);
+            }
+            $query->execute();
+
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result;
+        }
     }
 ?>
