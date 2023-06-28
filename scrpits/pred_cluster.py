@@ -15,7 +15,7 @@ for i in range(0, len(data)):
     # récupère les latitudes et longitudes de chaque ligne et les stocke dans un tableau
     tab.append([data['latitude'][i], data['longitude'][i]])
 
-KM = KMeans(n_clusters=len(data), random_state=0).fit(tab)
+KM = KMeans(n_clusters=len(data), random_state=0, n_init='auto').fit(tab)
 
 prediction = KM.predict([[latitude, longitude]])
 lat_centroid = KM.cluster_centers_[prediction[0]][0]
