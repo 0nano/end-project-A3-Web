@@ -525,5 +525,23 @@
 
             return $result['n'];
         }
+    
+        /**
+         * 
+         */
+        public function predictionCluster() {
+            $latitude = 42.0;
+            $longitude = 2.0;
+            exec("python3 ../scripts/pred_cluster.py 45 0.7 ../resources/centroids.csv 2>&1", $output);
+            print_r($output);
+            # Affiche le PATH depuis lequel est executé le script
+            echo getcwd() . "\n";
+
+            if (!empty($output)) {
+                $output = json_decode($output[0]);
+            } else {
+                echo "No output received.";
+            }
+        }        
     }
 ?>
