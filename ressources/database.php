@@ -631,7 +631,7 @@
         /**
          * @param int $id
          * 
-         * @return string the gravity of an accident.
+         * @return string the gravity of a accident.
          * 
          * @throws PythonScriptException if the python script is empty.
          */
@@ -654,9 +654,9 @@
             
             $output = [];
             
-            exec("python3 ../scrpits/partie2.py " . $result['descr_athmo'] . " " . $result['descr_lum'] . " " . $result['descr_etat_surf'] . " " . $result['age'] . " " . $result['descr_dispo_secu'], $knn_output);
+            exec("python3 ../scripts/partie2.py " . $result['descr_athmo'] . " " . $result['descr_lum'] . " " . $result['descr_etat_surf'] . " " . $result['age'] . " " . $result['descr_dispo_secu'] . " 2>&1", $knn_output);
             $output['KNN'] = json_decode($knn_output[0]);
-
+            print_r($output['KNN']);
             exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " RF", $rf_output);
             $output['RF'] = json_decode($rf_output[0]);
 
