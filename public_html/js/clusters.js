@@ -5,8 +5,8 @@ ajaxRequest('GET', 'api/index.php/clusters', displayClusters, `prediction&lat=${
 
 function displayClusters(data){
     console.log(data);
-    var lat_cluster = data['clusters']['latitude du centroid'];
-    var lng_cluster = data['clusters']['longitude du centroid'];
+    var lat_cluster = data['cluster']['latitude du centroid'];
+    var lng_cluster = data['cluster']['longitude du centroid'];
 
     var lat_acc = data['accident']['latitude de l\'accident'];
     var lng_acc = data['accident']['longitude de l\'accident'];
