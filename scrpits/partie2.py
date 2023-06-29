@@ -6,6 +6,7 @@ import pandas as pd
 dataframe = pd.read_csv("export_IA.csv", sep=',', engine='c', encoding='utf-8', low_memory=False)
 
 import platform
+
 if platform.system() == 'Windows':
     # préparation des données, conversions des dates et des heures en entier sans les séparateurs
     dataframe['date'] = pd.to_datetime(dataframe['date'], format='%Y-%m-%d %H:%M:%S').dt.strftime('%Y%m%d%H%M%S').astype('Int64')
@@ -88,11 +89,12 @@ descr_lum = int(sys.argv[2])
 descr_etat_surf = int(sys.argv[3])
 age = float(sys.argv[4])
 descr_dispo_secu = int(sys.argv[5])
+print("tt")
 
 # On réalise un dataframe avec les données récupérées
 X_test = pd.DataFrame([[descr_athmo, descr_lum, descr_etat_surf, age, descr_dispo_secu]])
-
 result = knn.predict(X_test)
+print("tt")
 
 # Exportation des données prédites
 import json
