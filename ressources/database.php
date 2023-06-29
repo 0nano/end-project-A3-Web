@@ -549,6 +549,19 @@
             
             $output = json_decode($output[0]);
             return json_encode($output);
-        }        
+        }      
+        
+        /**
+         * Adds an accident to the database.
+         * 
+         * @param array $accident
+         * 
+         * @return bool true if the accident has been added, false otherwise.
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function addAccident($accident): bool {
+            
+        }
     }
 ?>

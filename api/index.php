@@ -191,6 +191,22 @@
                     APIErrors::internalError();
                 }
             }
+
+        case 'ajout' . 'PUT' :
+            //$authorization = getAuthorizationToken();
+            echo file_get_contents(('php://input'), $_PUT);
+            /*$accident = array();
+            try {
+                $db->addAccident($accident);
+            } catch (Exception $e) {
+                APIErrors::invalidCredential();
+            }
+            http_response_code(200);
+            die(json_encode(array(
+                'message' => 'Accident added'
+            )));*/
+            http_response_code(200);
+            die(json_encode($_PUT));
         
         case 'test' . 'GET' :
             http_response_code(200);

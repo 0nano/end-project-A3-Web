@@ -219,6 +219,7 @@ with open('datas.csv', 'r') as file:
         # Récupération des valeurs du CSV
         num_acc = int(row[1].strip())
         date = row[4].strip()
+        age = int(float(row[15].strip()))
         id_code_insee = int(row[0].strip())
         ville = row[5].strip()
         latitude = float(row[6].strip())
@@ -234,7 +235,7 @@ with open('datas.csv', 'r') as file:
 
    
         # Insertion des données dans la table "accident"
-        mycursor.execute("INSERT INTO accident (Num_Acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (num_acc, date, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu))
+        mycursor.execute("INSERT INTO accident (Num_Acc, date, age, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", (num_acc, date, age, id_code_insee, ville, latitude, longitude, descr_grav, department_number, department_name, region_number, descr_athmo, descr_lum, descr_etat_surf, descr_dispo_secu))
         mydb.commit()
 
 # Fermeture de la connexion à la base de données
