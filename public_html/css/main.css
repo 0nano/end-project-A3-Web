@@ -167,8 +167,12 @@ footer {
 }
 
 .left-box{
-  margin-left: 5%;
+  margin-left:5%;
  
+}
+
+.visu{
+  margin-left: 30%;
 }
 
 .param{
@@ -345,6 +349,11 @@ width: 80%;
 height: 66%;
 margin-left: 10%;
 border-radius: 35px;
+}
+
+
+.tab-acc{
+  
 }
 
 /* VISUALISATION - MAP*/
