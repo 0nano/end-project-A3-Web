@@ -416,7 +416,7 @@
 
             $finalOffset = $offset * 20;
 
-            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins .'GROUP BY id_accident LIMIT 20 OFFSET :debut');
+            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins .' LIMIT 20 OFFSET :debut');
             if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
                 $query->bindParam(':athmo', $filtre['athmo']);
             }
