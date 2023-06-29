@@ -192,10 +192,20 @@
                 }
             }
 
-        case 'ajout' . 'PUT' :
+        case 'ajout' . 'POST' :
             //$authorization = getAuthorizationToken();
-            echo file_get_contents('php://input');
-            /*$accident = array();
+            $accident = array();
+            $accident["lat"] = $_POST["lat"];
+            $accident["lng"] = $_POST["lng"];
+            $accident["athmo"] = $_POST["athmo"];
+            $accident["lum"] = $_POST["lum"];
+            $accident["etat_surf"] = $_POST["etat_surf"];
+            $accident["dispo_secu"] = $_POST["dispo_secu"];
+            $accident["date"] = $_POST["date"];
+            $accident["heure"] = $_POST["heure"];
+            $accident["age"] = $_POST["age"];
+            $accident["ville"] = $_POST["ville"];
+            
             try {
                 $db->addAccident($accident);
             } catch (Exception $e) {
@@ -204,9 +214,7 @@
             http_response_code(200);
             die(json_encode(array(
                 'message' => 'Accident added'
-            )));*/
-            http_response_code(200);
-            die(json_encode($_PUT));
+            )));
         
         case 'test' . 'GET' :
             http_response_code(200);

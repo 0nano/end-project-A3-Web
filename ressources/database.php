@@ -12,6 +12,7 @@
 
     class Database {
         protected $PDO;
+        protected $bd;
 
         /**
          * Connection à la base de données
@@ -26,12 +27,14 @@
                     DB_USER,
                     DB_PASSWORD
                 );
+                $this->bd = 'pgsql';
             } else if(extension_loaded('pdo_mysql')){
                 $this->PDO = new PDO(
                     'mysql:host=' . DB_SERVER . ';port=3306;dbname=' . DB_NAME . ';charset=utf8',
                     DB_USER,
                     DB_PASSWORD
                 );
+                $this->bd = 'mysql';
             } else {
                 throw new PDONotFind();
             }
@@ -340,7 +343,8 @@
          * @throws ConnectionException if the array is empty.
          */
         public function getAllAccidents(int $offset = 0): ?array {
-            $request = 'SELECT id_accident , Num_Acc , date, age , id_code_insee , ville ,
+            if ($this->bd == 'pgsql'){
+                $request = 'SELECT id_accident , Num_Acc , date, age , id_code_insee , ville ,
                         latitude , longitude , descr_grav , department_number ,
                         department_name , region_number , descr_athmo , a.description "athmo_descr", 
                         descr_lum, l.description "lum_descr", descr_etat_surf , es.description "etat_surf_descr",
@@ -349,7 +353,19 @@
                         LEFT JOIN descr_lum l ON descr_lum = id_lum
                         LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
                         LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu 
-                        GROUP BY id_accident LIMIT 20 OFFSET :debut';
+                        LIMIT 20 OFFSET :debut';
+            }else {
+                $request = 'SELECT id_accident , Num_Acc , date, age , id_code_insee , ville ,
+                latitude , longitude , descr_grav , department_number ,
+                department_name , region_number , descr_athmo , a.description "athmo_descr", 
+                descr_lum, l.description "lum_descr", descr_etat_surf , es.description "etat_surf_descr",
+                descr_dispo_secu , ds.description "dispo_secu_descr" FROM accident
+                LEFT JOIN descr_athmo a ON descr_athmo = id_athmo
+                LEFT JOIN descr_lum l ON descr_lum = id_lum
+                LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
+                LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu 
+                GROUP BY id_accident LIMIT 20 OFFSET :debut';
+            }
 
             $finalOffset = $offset * 20;
 
@@ -404,6 +420,12 @@
                 $conditins .= 'descr_dispo_secu = :dispo_secu';
             }
 
+            if ($this->bd == 'pgsql'){
+                $conditins .= ' LIMIT 20 OFFSET :debut';
+            }else {
+                $conditins .= 'group by id_accident LIMIT 20 OFFSET :debut';
+            }
+
             $request = 'SELECT id_accident , Num_Acc , date, age , id_code_insee , ville ,
                         latitude , longitude , descr_grav , department_number ,
                         department_name , region_number , descr_athmo , a.description "athmo_descr", 
@@ -416,7 +438,7 @@
 
             $finalOffset = $offset * 20;
 
-            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins .' LIMIT 20 OFFSET :debut');
+            $query = $this->PDO->prepare($request. ' WHERE ' . $conditins);
             if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
                 $query->bindParam(':athmo', $filtre['athmo']);
             }
