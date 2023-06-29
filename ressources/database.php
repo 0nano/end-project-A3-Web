@@ -340,7 +340,7 @@
          * @throws ConnectionException if the array is empty.
          */
         public function getAllAccidents(int $offset = 0): ?array {
-            $request = 'SELECT id_accident , Num_Acc , date , id_code_insee , ville ,
+            $request = 'SELECT id_accident , Num_Acc , date, age , id_code_insee , ville ,
                         latitude , longitude , descr_grav , department_number ,
                         department_name , region_number , descr_athmo , a.description "athmo_descr", 
                         descr_lum, l.description "lum_descr", descr_etat_surf , es.description "etat_surf_descr",
@@ -403,7 +403,7 @@
                 $conditins .= 'descr_dispo_secu = :dispo_secu';
             }
 
-            $request = 'SELECT id_accident , Num_Acc , date , id_code_insee , ville ,
+            $request = 'SELECT id_accident , Num_Acc , date, age , id_code_insee , ville ,
                         latitude , longitude , descr_grav , department_number ,
                         department_name , region_number , descr_athmo , a.description "athmo_descr", 
                         descr_lum, l.description "lum_descr", descr_etat_surf , es.description "etat_surf_descr",

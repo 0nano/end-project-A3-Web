@@ -1,10 +1,17 @@
-<!DOCTYPE html><html><head><link href="https://fonts.googleapis.com/css?family=Itim&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
-    <link href="./public_html/css/main.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
-    <title>Visualisation</title></head>
-    <link rel="icon" type="image/x-icon" href="./public_html/img/wheel.png">
-    <meta charset="utf-8" />
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8"/>
+      <link href="https://fonts.googleapis.com/css?family=Itim&display=swap" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+      <link href="./public_html/css/main.css" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
+      <title>Visualisation</title>
+      <link rel="icon" type="image/x-icon" href="./public_html/img/wheel.png">
+      <script src="./public_html/js/ajaxRequest.js" defer></script>
+      <script src="./public_html/js/affichageTab.js" defer></script>
+      <link rel="stylesheet" href="./public_html/css/table.css">
+    </head>
     <body>
         <header>
           <div class="header-wheel">
@@ -29,10 +36,29 @@
                 <div class="upper-visu">
                   <h2>Tableau des Accidents: </h2>
                 </div>
-                <a href="prediction-select.html" style="color: inherit; "><div class="header-box" style="width: 100%; margin-top:2%;"><h2>Prédire l'accident séléctionné</h2></div></a>
+                <button class="header-box" id="prediction" style="color: inherit; width: 10vw;">
+                    <h2 style="font-size: large;">Prédire l'accident séléctionné</h2>
+                </button>
               </div>
               <div class="lower-visu">
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Date</th>
+                      <th>Âge du conducteur</th>
+                      <th>La latitude</th>
+                      <th>La longitude</th>
+                      <th>Les conditions atmosphériques</th>
+                      <th>La luminosité de la scène</th>
+                      <th>L’état de la route</th>
+                      <th>L’état d’utilisation de la ceinture de sécurité</th>
+                    </tr>
+                  </thead>
+                  <tbody id="accidentsbody">
 
+                  </tbody>
+                </table>
               </div>
             </div>
             <div>

@@ -38,6 +38,7 @@ CREATE TABLE accident (
     id_accident SERIAL PRIMARY KEY,
     Num_Acc BIGINT,
     date DATE,
+    age INT,
     id_code_insee INT NOT NULL,
     ville VARCHAR(255) NOT NULL,
     latitude FLOAT NOT NULL,
