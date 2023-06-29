@@ -22,14 +22,14 @@ function displayClusters(data){
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    var myIcon = L.icon({
-        iconUrl: 'public_html/img/gps_vert.png',
-        iconSize: [38, 38],
-        iconAnchor: [22, 94],
-        popupAnchor: [-3, -76],
-    });
-    var marker = L.marker([lat_cluster, lng_cluster], {icon: myIcon}).addTo(map);
-    var marker = L.marker([lat_acc, lng_acc]).addTo(map);
+    var redIcon = L.icon({
+        iconUrl: 'https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/images/marker-icon-2x-red.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41]
+      });
+      
+      var marker = L.marker([lat_cluster, lng_cluster], { icon: redIcon }).addTo(map);
+      var marker = L.marker([lat_acc, lng_acc]).addTo(map);
     document.getElementById('myDivPredict').append(map);
 }
 
