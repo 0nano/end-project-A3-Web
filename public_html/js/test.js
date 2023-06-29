@@ -27,7 +27,7 @@ for (i=0; i<10; i++){
 //mettre le resultat de la requete dans une variable
 
 function total(data){
-        data_full = data_full.concat(data);
+data_full = data_full.concat(data);
   
 let data_lon = data_full.map(row => row['longitude']);
 let data_lat = data_full.map(row => row['latitude']);
