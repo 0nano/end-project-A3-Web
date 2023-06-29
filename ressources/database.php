@@ -537,6 +537,10 @@
          * @throws PythonScriptException if the python script is empty.
          */
         public function predictionCluster(float $latitude, float $longitude): string{
+            if (!isset($latitude) || !isset($longitude)){
+                throw new InvalidArgumentException();
+            }
+
             exec("python3 ../scrpits/pred_cluster.py " . $latitude . " " . $longitude . " ../ressources/centroids.csv", $output);
 
             if (empty($output)) {

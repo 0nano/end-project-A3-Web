@@ -182,6 +182,15 @@
                     }
                 }
             }
+
+        case 'clusters' . 'GET' :
+            if (isset($_GET["prediction"])) {
+                try {
+                    die($db->predictionCluster($_GET["lat"], $_GET["lng"]));
+                } catch (Exception $e) {
+                    APIErrors::internalError();
+                }
+            }
         
         case 'test' . 'GET' :
             http_response_code(200);
