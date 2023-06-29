@@ -416,6 +416,8 @@ border-bottom-left-radius: 10px;
 
 .predict{
   margin-left: 50%;
+  width: 500px;
+  height: 400px;
 }
 .prediction-boxes{
 width: 100%;
