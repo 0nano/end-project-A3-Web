@@ -17,7 +17,6 @@ function displayClusters(data){
 
  // dessine une carte de la france avec le point de l'accident et le point du cluster
     var map = L.map('myDivPredict').setView([lat, lng], 6);
-    map.setSize(new L.Point(400, 300));
     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
         maxZoom: 20,
         minZoom: 5,
