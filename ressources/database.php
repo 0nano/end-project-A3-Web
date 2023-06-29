@@ -650,7 +650,10 @@
             
             $output = [];
             
-            exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " RF", $rf_output, $bla);
+            exec("python3 ../scrpits/partie2.py " . $result['descr_athmo'] . " " . $result['descr_lum'] . " " . $result['descr_etat_surf'] . " " . $result['age'] . " " . $result['descr_dispo_secu'], $knn_output);
+            $output['KNN'] = json_decode($knn_output[0]);
+
+            exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " RF", $rf_output);
             $output['RF'] = json_decode($rf_output[0]);
 
             exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " SVM", $svm_output);

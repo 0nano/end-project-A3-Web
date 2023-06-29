@@ -70,10 +70,8 @@ dataframe['region_number'] = dataframe['region_number'].astype(int)
 # On supprime les colonnes 'an_nais', 'id_usa', 'num_acc' et 'department_number' car elles sont corolés à d'autres variables
 dataframe = dataframe.drop(columns=['an_nais', 'id_usa', 'Num_Acc', 'department_number'])
 
-df = dataframe[['id_code_insee', 'latitude.x', 'longitude.x', 'descr_cat_veh',
-       'descr_agglo', 'descr_athmo', 'descr_lum', 'descr_etat_surf',
-       'description_intersection', 'age', 'place', 'descr_dispo_secu', 
-       'descr_motif_traj', 'descr_type_col']]
+df = dataframe[['descr_athmo', 'descr_lum', 'descr_etat_surf',
+       'age', 'descr_dispo_secu']]
 
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -85,23 +83,14 @@ knn.fit(df, dataframe['descr_grav'])
 # Récupération des données à prédire
 import sys
 
-id_code_insee = int(sys.argv[1])
-latitude = float(sys.argv[2])
-longitude = float(sys.argv[3])
-descr_cat_veh = int(sys.argv[4])
-descr_agglo = int(sys.argv[5])
-descr_athmo = int(sys.argv[6])
-descr_lum = int(sys.argv[7])
-descr_etat_surf = int(sys.argv[8])
-description_intersection = int(sys.argv[9])
-age = float(sys.argv[10])
-place = float(sys.argv[11])
-descr_dispo_secu = int(sys.argv[12])
-descr_motif_traj = int(sys.argv[13])
-descr_type_col = int(sys.argv[14])
+descr_athmo = int(sys.argv[1])
+descr_lum = int(sys.argv[2])
+descr_etat_surf = int(sys.argv[3])
+age = float(sys.argv[4])
+descr_dispo_secu = int(sys.argv[5])
 
 # On réalise un dataframe avec les données récupérées
-X_test = pd.DataFrame([[id_code_insee, latitude, longitude, descr_cat_veh, descr_agglo, descr_athmo, descr_lum, descr_etat_surf, description_intersection, age, place, descr_dispo_secu, descr_motif_traj, descr_type_col]])
+X_test = pd.DataFrame([[descr_athmo, descr_lum, descr_etat_surf, age, descr_dispo_secu]])
 
 result = knn.predict(X_test)
 
