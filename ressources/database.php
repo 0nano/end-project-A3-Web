@@ -586,5 +586,39 @@
         public function addAccident($accident): bool {
 
         }
+
+        /**
+         * 
+         */
+        public function getAllGravite(int $id): string {
+            if (!isset($id)){
+                throw new InvalidArgumentException();
+            }
+
+            $request = 'SELECT descr_athmo, descr_lum, descr_etat_surf, age, descr_dispo_secu FROM accident WHERE id_accident = :id';
+
+            $query = $this->PDO->prepare($request);
+            $query->bindParam(':id', $id);
+            $query->execute();
+
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+            
+            $output = [];
+
+            exec("python3 ../scrpits/partie3.py . ".$result['descr_athmo']."  ,".$result['descr_lum']."  ,".$result['age'].", ".$result['descr_dispo_secu']." RF", $rf_output);
+            $output['RF'] = $rf_output;
+
+            exec("python3 ../scrpits/partie3.py . ".$result['descr_athmo']."  ,".$result['descr_lum']."  ,".$result['age'].", ".$result['descr_dispo_secu']." SVM", $svm_output);
+            $output['SVM'] = $svm_output;
+
+            exec("python3 ../scrpits/partie3.py . ".$result['descr_athmo']."  ,".$result['descr_lum']."  ,".$result['age'].", ".$result['descr_dispo_secu']." MLP", $mlp_output);
+            $output['MLP'] = $mlp_output;
+
+            return json_encode($output);
+        }
     }
 ?>

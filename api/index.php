@@ -191,6 +191,15 @@
                     APIErrors::internalError();
                 }
             }
+            
+        case 'gravite' . 'GET' :
+            if (isset($_GET["all"])) {
+                try {
+                    die($db->getAllGravite($_GET["id"]));
+                } catch (Exception $e) {
+                    APIErrors::internalError();
+                }
+            }
 
         case 'ajout' . 'POST' :
             //$authorization = getAuthorizationToken();
