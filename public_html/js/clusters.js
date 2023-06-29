@@ -23,7 +23,7 @@ function displayClusters(data){
     }).addTo(map);
 
     var myIcon = L.icon({
-        iconUrl: '../img/gps_vert.png',
+        iconUrl: 'public_html/img/gps_vert.png',
         iconSize: [38, 38],
         iconAnchor: [22, 94],
         popupAnchor: [-3, -76],
