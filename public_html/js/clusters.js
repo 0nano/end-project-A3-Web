@@ -26,8 +26,8 @@ function displayClusters(data){
     var markerAcc = L.marker([lat_acc, lng_acc]).addTo(map);
     var markerCluster = L.marker([lat_cluster, lng_cluster]).addTo(map);
 
-    markerAcc.bindTooltip("Texte pour l'accident").openTooltip();
-    markerCluster.bindTooltip("Texte pour le cluster").openTooltip();
+    markerAcc.bindTooltip("Accident").openTooltip();
+    markerCluster.bindTooltip("Cluster").openTooltip();
     
     document.getElementById('myDivPredict').append(map);
 }
