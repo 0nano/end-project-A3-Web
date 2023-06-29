@@ -6,9 +6,9 @@ from sys import argv
 import sklearn
 import argparse
 
-best_model_svm = joblib.load('best_model_svm.pkl')
-best_model_rf = joblib.load('best_model_rf.pkl')
-best_model_mlp = joblib.load('best_model_mlp.pkl')
+best_model_svm = joblib.load('../scrpits/best_model_svm.pkl')
+best_model_rf = joblib.load('../scrpits/best_model_rf.pkl')
+best_model_mlp = joblib.load('../scrpits/best_model_mlp.pkl')
 
 # Fonction de prédiction de gravité d'accident
 

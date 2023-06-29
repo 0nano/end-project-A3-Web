@@ -651,14 +651,13 @@
             $output = [];
             
             exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " RF", $rf_output, $bla);
-            print_r($rf_output);
-            $output['RF'] = $rf_output;
+            $output['RF'] = json_decode($rf_output[0]);
 
             exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " SVM", $svm_output);
-            $output['SVM'] = $svm_output;
+            $output['SVM'] = json_decode($svm_output[0]);
 
             exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " MLP", $mlp_output);
-            $output['MLP'] = $mlp_output;
+            $output['MLP'] = json_decode($mlp_output[0]);
 
             return json_encode($output);
         }
