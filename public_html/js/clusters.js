@@ -15,14 +15,20 @@ function displayClusters(data){
     console.log(lat_acc);
     console.log(lng_acc);
 
- // dessine une carte de la france avec le point de l'accident et le point du cluster
     var map = L.map('myDivPredict').setView([lat, lng], 6);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
         maxZoom: 20,
         minZoom: 5,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     }).addTo(map);
-    var marker = L.marker([lat_cluster, lng_cluster]).addTo(map);
+
+    var myIcon = L.icon({
+        iconUrl: '../img/gps_vert.png',
+        iconSize: [38, 38],
+        iconAnchor: [22, 94],
+        popupAnchor: [-3, -76],
+    });
+    var marker = L.marker([lat_cluster, lng_cluster], {icon: myIcon}).addTo(map);
     var marker = L.marker([lat_acc, lng_acc]).addTo(map);
     document.getElementById('myDivPredict').append(map);
 }
