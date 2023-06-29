@@ -17,13 +17,13 @@ function displayTab(data) {
         document.getElementById('accidentsbody').innerHTML += inner;
     }
 
-    let pred = document.getElementById('prediction');
+    let pred = document.getElementById('cluster');
 
     pred.addEventListener('click', function() {
         let radios = document.querySelectorAll('input[type=radio]');
         for (let i = 0; i < radios.length; i++) {
             if (radios[i].checked) {
-                location.replace("./prediction-select.html?id=" + radios[i].value);
+                location.replace("./prediction.html?id=" + radios[i].value);
             }
         }
     });
