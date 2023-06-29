@@ -383,6 +383,47 @@
         }
 
         /**
+         * Gets all the accidents descriptions for map page
+         * 
+         * @param int $offset the offset of the request to get the next 10000 accidents.
+         * 
+         * @return array of all the accidents description.
+         * 
+         * @throws ConnectionException if the array is empty.
+         */
+        public function getAllAccidentsBig(int $offset = 0): ?array {
+            if ($this->bd == 'pgsql'){
+                $request = 'SELECT id_accident, ville , latitude , longitude FROM accident
+                        LEFT JOIN descr_athmo a ON descr_athmo = id_athmo
+                        LEFT JOIN descr_lum l ON descr_lum = id_lum
+                        LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
+                        LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu
+                        LIMIT 80000 OFFSET :debut';
+            }else {
+                $request = 'SELECT id_accident, ville , latitude , longitude FROM accident
+                LEFT JOIN descr_athmo a ON descr_athmo = id_athmo
+                LEFT JOIN descr_lum l ON descr_lum = id_lum
+                LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
+                LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu 
+                GROUP BY id_accident LIMIT 80000 OFFSET :debut';
+            }
+
+            $finalOffset = $offset * 80000;
+
+            $query = $this->PDO->prepare($request);
+            $query->bindParam(':debut', $finalOffset, PDO::PARAM_INT);
+            $query->execute();
+
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            return $result;
+        }
+
+        /**
          * Gets all the accidents descriptions
          * left join by all the descriptions tables
          * with a filtre on all descriptions tables
@@ -603,19 +644,20 @@
 
             $result = $query->fetch(PDO::FETCH_ASSOC);
 
-            if(!$result){
-                throw new ConnectionException();
-            }
+            // if(!$result){
+            //     throw new ConnectionException();
+            // }
             
             $output = [];
-
-            exec("python3 ../scrpits/partie3.py . ".$result['descr_athmo']."  ,".$result['descr_lum']."  ,".$result['age'].", ".$result['descr_dispo_secu']." RF", $rf_output);
+            
+            exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " RF", $rf_output, $bla);
+            print_r($rf_output);
             $output['RF'] = $rf_output;
 
-            exec("python3 ../scrpits/partie3.py . ".$result['descr_athmo']."  ,".$result['descr_lum']."  ,".$result['age'].", ".$result['descr_dispo_secu']." SVM", $svm_output);
+            exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " SVM", $svm_output);
             $output['SVM'] = $svm_output;
 
-            exec("python3 ../scrpits/partie3.py . ".$result['descr_athmo']."  ,".$result['descr_lum']."  ,".$result['age'].", ".$result['descr_dispo_secu']." MLP", $mlp_output);
+            exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " MLP", $mlp_output);
             $output['MLP'] = $mlp_output;
 
             return json_encode($output);

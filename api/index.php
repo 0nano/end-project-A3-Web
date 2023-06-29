@@ -123,7 +123,21 @@
 
         case 'accidents' . 'GET' :
             http_response_code(200);
-            if (isset($_GET["filtre"])) {
+            if (isset($_GET["big"])) {
+                if (isset($_GET["offset"])) {
+                    try {
+                        die(json_encode($db->getAllAccidentsBig($_GET["offset"])));
+                    } catch (Exception $e) {
+                        APIErrors::internalError();
+                    }
+                } else {
+                    try {
+                        die(json_encode($db->getAllAccidentsBig()));
+                    } catch (Exception $e) {
+                        APIErrors::internalError();
+                    }
+                }
+            } else if (isset($_GET["filtre"])) {
                 $filtre = array();
                 if (isset($_GET["athmo"])) {
                     $filtre["athmo"] = $_GET["athmo"];
@@ -214,7 +228,7 @@
             $accident["heure"] = $_POST["heure"];
             $accident["age"] = $_POST["age"];
             $accident["ville"] = $_POST["ville"];
-            
+
             try {
                 $db->addAccident($accident);
             } catch (Exception $e) {

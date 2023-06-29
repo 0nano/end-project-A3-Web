@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 import joblib
 import sys
 from sys import argv
@@ -13,19 +14,26 @@ best_model_mlp = joblib.load('best_model_mlp.pkl')
 
 #print(accident_info)
 classification_method = argv[2]
-print(argv[1])
-print(argv[2])
+
 
 def predict_accident_gravity(accident_info, classification_method):
-    accident_info = [float(arg) for arg in argv[1].split(',')]
-    accident_info = [accident_info]
+    
+    temp = argv[1].split(',')
+    descr_athmo = float(temp[0])
+    descr_lum = float(temp[1])
+    descr_etat_surf = float(temp[2])
+    age = float(temp[3])
+    descr_dispo_secu = float(temp[4])
+    
+    df = pd.DataFrame([[descr_athmo, descr_lum, descr_etat_surf, age, descr_dispo_secu]], columns=['descr_athmo', 'descr_lum', 'descr_etat_surf', 'age', 'descr_dispo_secu'])
+    
     # Utiliser la méthode de classification spécifiée
     if classification_method == "SVM":
-        prediction = best_model_svm.predict(accident_info)
+        prediction = best_model_svm.predict(df)
     elif classification_method == "RF":
-        prediction = best_model_rf.predict(accident_info)
+        prediction = best_model_rf.predict(df)
     elif classification_method == "MLP":
-        prediction = best_model_mlp.predict(accident_info)
+        prediction = best_model_mlp.predict(df)
     else:
         #Méthode de classification non prise en charge
         return None
