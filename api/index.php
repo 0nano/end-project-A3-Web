@@ -194,7 +194,7 @@
 
         case 'ajout' . 'PUT' :
             //$authorization = getAuthorizationToken();
-            echo file_get_contents(('php://input'), $_PUT);
+            echo file_get_contents('php://input');
             /*$accident = array();
             try {
                 $db->addAccident($accident);

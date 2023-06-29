@@ -348,7 +348,8 @@
                         LEFT JOIN descr_athmo a ON descr_athmo = id_athmo
                         LEFT JOIN descr_lum l ON descr_lum = id_lum
                         LEFT JOIN descr_etat_surf es ON descr_etat_surf = id_surf
-                        LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu LIMIT 20 OFFSET :debut';
+                        LEFT JOIN descr_dispo_secu ds ON descr_dispo_secu = id_secu 
+                        GROUP BY id_accident LIMIT 20 OFFSET :debut';
 
             $finalOffset = $offset * 20;
 
@@ -415,7 +416,7 @@
 
             $finalOffset = $offset * 20;
 
-            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins .' LIMIT 20 OFFSET :debut');
+            $query = $this->PDO->prepare($request. ' WHERE ' .$conditins .'GROUP BY id_accident LIMIT 20 OFFSET :debut');
             if (isset($filtre['athmo']) && $filtre['athmo'] != '') {
                 $query->bindParam(':athmo', $filtre['athmo']);
             }
@@ -561,7 +562,7 @@
          * @throws ConnectionException if the array is empty.
          */
         public function addAccident($accident): bool {
-            
+
         }
     }
 ?>
