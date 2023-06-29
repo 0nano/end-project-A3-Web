@@ -22,18 +22,12 @@ function displayClusters(data){
         minZoom: 5,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     }).addTo(map);
-    //bin popup sur le marker
-    var popup = L.popup()
-        .setLatLng([lat_acc, lng_acc])
-        .setContent("Accident")
-        .openOn(map);
-    var popup = L.popup()
-        .setLatLng([lat_cluster, lng_cluster])
-        .setContent("Cluster")
-        .openOn(map);
-    //ajout des markers
-    var marker = L.marker([lat_acc, lng_acc]).addTo(map);
-    var marker = L.marker([lat_cluster, lng_cluster]).addTo(map);
+
+    var markerAcc = L.marker([lat_acc, lng_acc]).addTo(map);
+    var markerCluster = L.marker([lat_cluster, lng_cluster]).addTo(map);
+
+    markerAcc.bindTooltip("Texte pour l'accident").openTooltip();
+    markerCluster.bindTooltip("Texte pour le cluster").openTooltip();
     
     document.getElementById('myDivPredict').append(map);
 }
