@@ -22,13 +22,9 @@ function displayClusters(data){
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    var redIcon = L.icon({
-        iconUrl: 'https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/images/marker-icon-2x-red.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41]
-      });
+
       
-      var marker = L.marker([lat_cluster, lng_cluster], { icon: redIcon }).addTo(map);
+      var marker = L.marker([lat_cluster, lng_cluster]).addTo(map);
       var marker = L.marker([lat_acc, lng_acc]).addTo(map);
     document.getElementById('myDivPredict').append(map);
 }
