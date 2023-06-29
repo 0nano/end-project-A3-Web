@@ -1,4 +1,4 @@
-for (i=0; i<2800; i++){
+for (i=0; i<4000; i++){
     ajaxRequest('GET', 'api/index.php/accidents?offset='+i, total)
 }
 //ajaxRequest('GET', 'api/index.php/accidents?offset=1', blabla)
@@ -21,7 +21,7 @@ var data = [
         Text: data_ville,
 		lon: data_lon,
 		lat: data_lat,
-		marker: { color: "fuchsia", size: 4 }
+		marker: { color: '#FFE194', size: 10 }
 	}
 ];
 
