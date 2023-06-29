@@ -1,5 +1,5 @@
-var lng = 4.6;
-var lat = 48.05;
+var lng = 3.6;
+var lat = 45.05;
 
 ajaxRequest('GET', 'api/index.php/clusters', displayClusters, `prediction&lat=${lat}&lng=${lng}`);
 
