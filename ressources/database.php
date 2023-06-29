@@ -644,9 +644,9 @@
 
             $result = $query->fetch(PDO::FETCH_ASSOC);
 
-            // if(!$result){
-            //     throw new ConnectionException();
-            // }
+            if(!$result){
+                throw new ConnectionException();
+            }
             
             $output = [];
             
