@@ -17,13 +17,24 @@ function displayTab(data) {
         document.getElementById('accidentsbody').innerHTML += inner;
     }
 
-    let pred = document.getElementById('cluster');
+    let clust = document.getElementById('cluster');
+
+    clust.addEventListener('click', function() {
+        let radios = document.querySelectorAll('input[type=radio]');
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                location.replace("./prediction.html?id=" + radios[i].value);
+            }
+        }
+    });
+
+    let pred = document.getElementById('prediction');
 
     pred.addEventListener('click', function() {
         let radios = document.querySelectorAll('input[type=radio]');
         for (let i = 0; i < radios.length; i++) {
             if (radios[i].checked) {
-                location.replace("./prediction.html?id=" + radios[i].value);
+                location.replace("./prediction-select.html?id=" + radios[i].value);
             }
         }
     });
