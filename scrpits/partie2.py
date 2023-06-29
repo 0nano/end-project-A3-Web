@@ -93,7 +93,6 @@ descr_dispo_secu = int(sys.argv[5])
 # On réalise un dataframe avec les données récupérées
 X_test = pd.DataFrame([[descr_athmo, descr_lum, descr_etat_surf, age, descr_dispo_secu]])
 result = knn.predict(X_test)
-
 # Exportation des données prédites
 import json
 
