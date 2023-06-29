@@ -24,6 +24,6 @@ function displayClusters(data){
     }).addTo(map);
     var marker = L.marker([lat_cluster, lng_cluster]).addTo(map);
     var marker = L.marker([lat_acc, lng_acc]).addTo(map);
-    document.getElementById('myDivPredict').appendChild(map);
+    document.getElementById('myDivPredict').append(map);
 }
 
