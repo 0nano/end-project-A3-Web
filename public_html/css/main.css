@@ -381,9 +381,9 @@ border-radius: 35px;
 
 #myDivPredict{
   position: relative;
-  border-radius: 35px;
-  height: 100%;
-  width: 100%;
+    border-radius: 35px;
+    height: 100%;
+    width: 100%;
 }
 .prediction-boxes{
 width: 100%;
