@@ -47,6 +47,16 @@ let lum = document.getElementById('descr_lum');
 let etat_surf = document.getElementById('descr_etat_surf');
 let dispo_secu = document.getElementById('descr_dispo_secu');
 
+function displayIndex(data) {
+    page.innerHTML = '';
+    for (let i = 0; i < data+1; i++) {
+        let inner = '<option value="' + i + '">' + (i+1) + '</option>';
+        page.insertAdjacentHTML('afterbegin', inner);
+    }
+}
+
+ajaxRequest('GET', 'api/index.php/accidents?length', displayIndex);
+
 page.addEventListener('change', function() {
     let vallum = lum.value;
     if (vallum != '') {
@@ -65,10 +75,10 @@ page.addEventListener('change', function() {
         valathmo = '&athmo=' + valathmo;
     }
     if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
-        let url = 'api/index.php/accidents';
+        let url = 'api/index.php/accidents?offset=' + page.value;
         ajaxRequest('GET', url, displayTab);
     }else{
-        let value = athmo.value;
+        let value = page.value;
         let url = 'api/index.php/accidents?filtre&offset=' + value + vallum + valetat_surf + valathmo +valdispo_secu;
         ajaxRequest('GET', url, displayTab);
     }
@@ -87,15 +97,15 @@ athmo.addEventListener('change', function() {
     if (valdispo_secu != '') {
         valdispo_secu = '&dispo_secu=' + valdispo_secu;
     }
-    let valoffset = page.value;
-    valoffset = '&offset=' + valoffset;
     if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
         let url = 'api/index.php/accidents';
         ajaxRequest('GET', url, displayTab);
+        ajaxRequest('GET', url+'&length', displayIndex);
     }else{
         let value = athmo.value;
-        let url = 'api/index.php/accidents?filtre&athmo=' + value + vallum + valetat_surf + valdispo_secu+valoffset;
+        let url = 'api/index.php/accidents?filtre&athmo=' + value + vallum + valetat_surf + valdispo_secu;
         ajaxRequest('GET', url, displayTab);
+        ajaxRequest('GET', url + '&length', displayIndex);
     }
 });
 
@@ -112,15 +122,15 @@ lum.addEventListener('change', function() {
     if (valathmo != '') {
         valathmo = '&athmo=' + valathmo;
     }
-    let valoffset = page.value;
-    valoffset = '&offset=' + valoffset;
     if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
         let url = 'api/index.php/accidents';
         ajaxRequest('GET', url, displayTab);
+        ajaxRequest('GET', url+'&length', displayIndex);
     }else{
-    let value = lum.value;
-    let url = 'api/index.php/accidents?filtre&lum=' + value + valetat_surf + valdispo_secu + valathmo;
-    ajaxRequest('GET', url, displayTab);
+        let value = lum.value;
+        let url = 'api/index.php/accidents?filtre&lum=' + value + valetat_surf + valdispo_secu + valathmo;
+        ajaxRequest('GET', url, displayTab);
+        ajaxRequest('GET', url + '&length', displayIndex);
     }
 });
 
@@ -137,15 +147,15 @@ etat_surf.addEventListener('change', function() {
     if (valathmo != '') {
         valathmo = '&athmo=' + valathmo;
     }
-    let valoffset = page.value;
-    valoffset = '&offset=' + valoffset;
     if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
         let url = 'api/index.php/accidents';
         ajaxRequest('GET', url, displayTab);
+        ajaxRequest('GET', url+'&length', displayIndex);
     }else{
-    let value = etat_surf.value;
-    let url = 'api/index.php/accidents?filtre&etat_surf=' + value + vallum + valdispo_secu + valathmo;
-    ajaxRequest('GET', url, displayTab);
+        let value = etat_surf.value;
+        let url = 'api/index.php/accidents?filtre&etat_surf=' + value + vallum + valdispo_secu + valathmo;
+        ajaxRequest('GET', url, displayTab);
+        ajaxRequest('GET', url + '&length', displayIndex);
     }
 });
 
@@ -162,14 +172,14 @@ dispo_secu.addEventListener('change', function() {
     if (valathmo != '') {
         valathmo = '&athmo=' + valathmo;
     }
-    let valoffset = page.value;
-    valoffset = '&offset=' + valoffset;
     if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
         let url = 'api/index.php/accidents';
         ajaxRequest('GET', url, displayTab);
+        ajaxRequest('GET', url+'&length', displayIndex);
     }else{
-    let value = dispo_secu.value;
-    let url = 'api/index.php/accidents?filtre&dispo_secu=' + value + vallum + valetat_surf + valathmo;
-    ajaxRequest('GET', url, displayTab);
+        let value = dispo_secu.value;
+        let url = 'api/index.php/accidents?filtre&dispo_secu=' + value + vallum + valetat_surf + valathmo;
+        ajaxRequest('GET', url, displayTab);
+        ajaxRequest('GET', url + '&length', displayIndex);
     }
 });

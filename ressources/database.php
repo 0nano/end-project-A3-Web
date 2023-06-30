@@ -417,7 +417,7 @@
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if(!$result){
-                throw new ConnectionException();
+                return null;
             }
 
             return $result;
@@ -464,7 +464,7 @@
             if ($this->bd == 'pgsql'){
                 $conditins .= ' LIMIT 20 OFFSET :debut';
             }else {
-                $conditins .= 'group by id_accident LIMIT 20 OFFSET :debut';
+                $conditins .= ' group by id_accident LIMIT 20 OFFSET :debut';
             }
 
             $request = 'SELECT id_accident , Num_Acc , date, age , id_code_insee , ville ,
@@ -498,7 +498,7 @@
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
             if(!$result){
-                throw new ConnectionException();
+                return null;
             }
 
             return $result;
@@ -523,7 +523,7 @@
                 throw new ConnectionException();
             }
 
-            return $result['n'];
+            return (int) ((int)$result['n']/20);
         }
 
         /**
@@ -587,7 +587,7 @@
                 throw new ConnectionException();
             }
 
-            return $result['n'];
+            return (int) ((int)$result['n']/20);
         }
     
         /**

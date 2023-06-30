@@ -161,13 +161,21 @@
                 }else{
                     if (isset($_GET["offset"])) {
                         try {
-                            die(json_encode($db->getAllAccidentsWithFiltre($filtre, $_GET["offset"])));
+                            $result = $db->getAllAccidentsWithFiltre($filtre, $_GET["offset"]);
+                            if ($result == null) {
+                                die(json_encode(array()));
+                            }
+                            die(json_encode($result));
                         } catch (Exception $e) {
                             APIErrors::internalError();
                         }
                     } else {
                         try {
-                            die(json_encode($db->getAllAccidentsWithFiltre($filtre)));
+                            $result = $db->getAllAccidentsWithFiltre($filtre);
+                            if ($result == null) {
+                                die(json_encode(array()));
+                            }
+                            die(json_encode($result));
                         } catch (Exception $e) {
                             APIErrors::internalError();
                         }
@@ -183,13 +191,21 @@
                 }else {
                     if (isset($_GET["offset"])) {
                         try {
-                            die(json_encode($db->getAllAccidents($_GET["offset"])));
+                            $result = $db->getAllAccidents($_GET["offset"]);
+                            if ($result == null) {
+                                die(json_encode(array()));
+                            }
+                            die(json_encode($result));
                         } catch (Exception $e) {
                             APIErrors::internalError();
                         }
                     } else {
                         try {
-                            die(json_encode($db->getAllAccidents()));
+                            $result = $db->getAllAccidents();
+                            if ($result == null) {
+                                die(json_encode(array()));
+                            }
+                            die(json_encode($result));
                         } catch (Exception $e) {
                             APIErrors::internalError();
                         }
