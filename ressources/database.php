@@ -600,12 +600,24 @@
          * 
          * @throws PythonScriptException if the python script is empty.
          */
-        public function predictionCluster(float $latitude, float $longitude): string{
-            if (!isset($latitude) || !isset($longitude)){
+        public function predictionCluster(int $id): string{
+            if (!isset($id)){
                 throw new InvalidArgumentException();
             }
 
-            exec("python3 ../scrpits/pred_cluster.py " . $latitude . " " . $longitude . " ../ressources/centroids.csv", $output);
+            $request = 'SELECT longitude, latitude FROM accident WHERE id_accident = :id';
+
+            $query = $this->PDO->prepare($request);
+            $query->bindParam(':id', $id);
+            $query->execute();
+
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            if(!$result){
+                throw new ConnectionException();
+            }
+
+            exec("python3 ../scrpits/pred_cluster.py " . $result["latitude"] . " " . $result["longitude"] . " ../ressources/centroids.csv", $output);
 
             if (empty($output)) {
                 throw new PythonScriptException();
@@ -625,7 +637,24 @@
          * @throws ConnectionException if the array is empty.
          */
         public function addAccident($accident): bool {
+            if (!isset($accident)){
+                throw new InvalidArgumentException();
+            }
 
+            $request = 'INSERT INTO accident (date, longitude, latitude, descr_athmo, descr_lum, descr_etat_surf, age, descr_dispo_secu, ville) VALUES (:date, :longitude, :latitude, :descr_athmo, :descr_lum, :descr_etat_surf, :age, :descr_dispo_secu, :ville)';
+
+            $query = $this->PDO->prepare($request);
+            $query->bindParam(':date', $accident['date']);
+            $query->bindParam(':longitude', $accident['lng']);
+            $query->bindParam(':latitude', $accident['lat']);
+            $query->bindParam(':descr_athmo', $accident['athmo']);
+            $query->bindParam(':descr_lum', $accident['lum']);
+            $query->bindParam(':descr_etat_surf', $accident['etat_surf']);
+            $query->bindParam(':age', $accident['age']);
+            $query->bindParam(':descr_dispo_secu', $accident['dispo_secu']);
+            $query->bindParam(':ville', $accident['ville']);
+            $result = $query->execute();
+            return true;
         }
 
         /**
@@ -655,7 +684,6 @@
             $output = [];
             
             exec("python3 ../scrpits/partie2.py " . $result['descr_athmo'] . " " . $result['descr_lum'] . " " . $result['descr_etat_surf'] . " " . $result['age'] . " " . $result['descr_dispo_secu'], $knn_output);
-            print_r($knn_output);
             $output['KNN'] = json_decode($knn_output[0]);
 
             exec("python3 ../scrpits/partie3.py " . $result['descr_athmo'] . "," . $result['descr_lum'] . "," . $result['descr_etat_surf'] . "," . $result['age'] . "," . $result['descr_dispo_secu'] . " RF", $rf_output);

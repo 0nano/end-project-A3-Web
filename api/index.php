@@ -200,7 +200,7 @@
         case 'clusters' . 'GET' :
             if (isset($_GET["prediction"])) {
                 try {
-                    die($db->predictionCluster($_GET["lat"], $_GET["lng"]));
+                    die($db->predictionCluster($_GET["id"]));
                 } catch (Exception $e) {
                     APIErrors::internalError();
                 }
@@ -216,7 +216,6 @@
             }
 
         case 'ajout' . 'POST' :
-            //$authorization = getAuthorizationToken();
             $accident = array();
             $accident["lat"] = $_POST["lat"];
             $accident["lng"] = $_POST["lng"];
@@ -225,14 +224,13 @@
             $accident["etat_surf"] = $_POST["etat_surf"];
             $accident["dispo_secu"] = $_POST["dispo_secu"];
             $accident["date"] = $_POST["date"];
-            $accident["heure"] = $_POST["heure"];
             $accident["age"] = $_POST["age"];
             $accident["ville"] = $_POST["ville"];
-
+            
             try {
                 $db->addAccident($accident);
             } catch (Exception $e) {
-                APIErrors::invalidCredential();
+                APIErrors::internalError();
             }
             http_response_code(200);
             die(json_encode(array(

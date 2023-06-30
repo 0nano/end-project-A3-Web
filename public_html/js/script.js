@@ -1,22 +1,10 @@
-ajaxRequest('GET', 'api/index.php/accidents?big', wait)
-//ajaxRequest('GET', 'api/index.php/accidents?offset=1', blabla)
-//mettre le resultat de la requete dans une variable
-var data_lon = [];
-var data_lat=[];
-var data_ville=[];
-var data_full;
-
-function wait(data){
-  	data_full = data;
-	console.log(data);
-}
+ajaxRequest('GET', 'api/index.php/accidents?big', total)
 
 function total(data){
   
-	let data_lon = data_full.map(row => row['longitude']);
-	let data_lat = data_full.map(row => row['latitude']);
-	let data_ville = data_full.map(row => row['ville']);
-
+	let data_lon = data.map(row => row['longitude']);
+	let data_lat = data.map(row => row['latitude']);
+	let data_ville = data.map(row => row['ville']);
 
 	var data = [
 		{
@@ -31,14 +19,7 @@ function total(data){
 	var layout = {
 		dragmode: "zoom",
 		mapbox: {
-			style: "white-bg",
-			layers: [
-				{
-					sourcetype: "raster",
-					source: ["https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer/tile/{z}/{y}/{x}"],
-					below: "traces"
-				}
-			],
+			style: "open-street-map",
 			center: { lat: 47 , lon: 2.5},
 			zoom: 5
 		},

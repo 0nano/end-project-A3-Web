@@ -1,6 +1,7 @@
 ajaxRequest('GET', 'api/index.php/accidents', displayTab);
 
 function displayTab(data) {
+    document.getElementById('accidentsbody').innerHTML = '';
     for (let i = 0; i < data.length; i++) {
         let id = data[i].id_accident;
         let date = data[i].date;
@@ -40,3 +41,135 @@ function displayTab(data) {
     });
 }
 
+let page = document.getElementById('page');
+let athmo = document.getElementById('descr_atmo');
+let lum = document.getElementById('descr_lum');
+let etat_surf = document.getElementById('descr_etat_surf');
+let dispo_secu = document.getElementById('descr_dispo_secu');
+
+page.addEventListener('change', function() {
+    let vallum = lum.value;
+    if (vallum != '') {
+        vallum = '&lum=' + vallum;
+    }
+    let valetat_surf = etat_surf.value;
+    if (valetat_surf != '') {
+        valetat_surf = '&etat_surf=' + valetat_surf;
+    }
+    let valdispo_secu = dispo_secu.value;
+    if (valdispo_secu != '') {
+        valdispo_secu = '&dispo_secu=' + valdispo_secu;
+    }
+    let valathmo = athmo.value;
+    if (valathmo != '') {
+        valathmo = '&athmo=' + valathmo;
+    }
+    if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
+        let url = 'api/index.php/accidents';
+        ajaxRequest('GET', url, displayTab);
+    }else{
+        let value = athmo.value;
+        let url = 'api/index.php/accidents?filtre&offset=' + value + vallum + valetat_surf + valathmo +valdispo_secu;
+        ajaxRequest('GET', url, displayTab);
+    }
+});
+
+athmo.addEventListener('change', function() {
+    let vallum = lum.value;
+    if (vallum != '') {
+        vallum = '&lum=' + vallum;
+    }
+    let valetat_surf = etat_surf.value;
+    if (valetat_surf != '') {
+        valetat_surf = '&etat_surf=' + valetat_surf;
+    }
+    let valdispo_secu = dispo_secu.value;
+    if (valdispo_secu != '') {
+        valdispo_secu = '&dispo_secu=' + valdispo_secu;
+    }
+    let valoffset = page.value;
+    valoffset = '&offset=' + valoffset;
+    if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
+        let url = 'api/index.php/accidents';
+        ajaxRequest('GET', url, displayTab);
+    }else{
+        let value = athmo.value;
+        let url = 'api/index.php/accidents?filtre&athmo=' + value + vallum + valetat_surf + valdispo_secu+valoffset;
+        ajaxRequest('GET', url, displayTab);
+    }
+});
+
+lum.addEventListener('change', function() {
+    let valetat_surf = etat_surf.value;
+    if (valetat_surf != '') {
+        valetat_surf = '&etat_surf=' + valetat_surf;
+    }
+    let valdispo_secu = dispo_secu.value;
+    if (valdispo_secu != '') {
+        valdispo_secu = '&dispo_secu=' + valdispo_secu;
+    }
+    let valathmo = athmo.value;
+    if (valathmo != '') {
+        valathmo = '&athmo=' + valathmo;
+    }
+    let valoffset = page.value;
+    valoffset = '&offset=' + valoffset;
+    if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
+        let url = 'api/index.php/accidents';
+        ajaxRequest('GET', url, displayTab);
+    }else{
+    let value = lum.value;
+    let url = 'api/index.php/accidents?filtre&lum=' + value + valetat_surf + valdispo_secu + valathmo;
+    ajaxRequest('GET', url, displayTab);
+    }
+});
+
+etat_surf.addEventListener('change', function() {
+    let vallum = lum.value;
+    if (vallum != '') {
+        vallum = '&lum=' + vallum;
+    }
+    let valdispo_secu = dispo_secu.value;
+    if (valdispo_secu != '') {
+        valdispo_secu = '&dispo_secu=' + valdispo_secu;
+    }
+    let valathmo = athmo.value;
+    if (valathmo != '') {
+        valathmo = '&athmo=' + valathmo;
+    }
+    let valoffset = page.value;
+    valoffset = '&offset=' + valoffset;
+    if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
+        let url = 'api/index.php/accidents';
+        ajaxRequest('GET', url, displayTab);
+    }else{
+    let value = etat_surf.value;
+    let url = 'api/index.php/accidents?filtre&etat_surf=' + value + vallum + valdispo_secu + valathmo;
+    ajaxRequest('GET', url, displayTab);
+    }
+});
+
+dispo_secu.addEventListener('change', function() {
+    let vallum = lum.value;
+    if (vallum != '') {
+        vallum = '&lum=' + vallum;
+    }
+    let valetat_surf = etat_surf.value;
+    if (valetat_surf != '') {
+        valetat_surf = '&etat_surf=' + valetat_surf;
+    }
+    let valathmo = athmo.value;
+    if (valathmo != '') {
+        valathmo = '&athmo=' + valathmo;
+    }
+    let valoffset = page.value;
+    valoffset = '&offset=' + valoffset;
+    if (lum.value == '' && etat_surf.value == '' && dispo_secu.value == '' && athmo.value == ''){
+        let url = 'api/index.php/accidents';
+        ajaxRequest('GET', url, displayTab);
+    }else{
+    let value = dispo_secu.value;
+    let url = 'api/index.php/accidents?filtre&dispo_secu=' + value + vallum + valetat_surf + valathmo;
+    ajaxRequest('GET', url, displayTab);
+    }
+});

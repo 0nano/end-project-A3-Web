@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 # Importation des données d'apprentissage
-dataframe = pd.read_csv("export_IA.csv", sep=',', engine='c', encoding='utf-8', low_memory=False)
+dataframe = pd.read_csv("../scrpits/export_IA.csv", sep=',', engine='c', encoding='utf-8', low_memory=False)
 
 import platform
 
